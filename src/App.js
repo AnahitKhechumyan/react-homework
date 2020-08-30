@@ -2,6 +2,23 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+function FullName(){
+  return(
+  <p>I am Anahit Khechumyan.</p>
+  );
+  }
+
+ 
+function Student(){
+  return(
+<div>
+  <h2>Hello!</h2>
+  <p>My name is Nana. </p>
+</div>
+  );
+}
+ 
+
 function App() {
   return (
     <div className="App">
@@ -10,6 +27,8 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <Student/>
+        <FullName/>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -21,6 +40,5 @@ function App() {
       </header>
     </div>
   );
-}
-
+};
 export default App;
