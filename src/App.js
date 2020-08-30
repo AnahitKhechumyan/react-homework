@@ -1,23 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Student from './Student'
+import FullName from './FullName'
 
-function FullName(){
-  return(
-  <p>I am Anahit Khechumyan.</p>
-  );
-  }
-
- 
-function Student(){
-  return(
-<div>
-  <h2>Hello!</h2>
-  <p>My name is Nana. </p>
-</div>
-  );
-}
- 
 
 function App() {
   return (
