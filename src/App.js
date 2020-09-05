@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Student from './Student'
-import FullName from './FullName'
+import Student from './Student';
+import FullName from './FullName';
+import Product from './Product';
+
 
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <Product name = "banana" prise = "1$" description = "Fresh banana from Ecuador"/>
         <Student/>
         <FullName/>
         <a
