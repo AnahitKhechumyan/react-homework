@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 
  class Description extends Component{
     render(){
-        let {description} = this.props;
+        let {data} = this.props;
         return(
-            <p>Description:{description}</p> 
+            <p>Description:{data}</p> 
         );
     } 
  }

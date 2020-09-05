@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 
  class Name extends Component{
     render(){
-        let {name} = this.props;
+        let {data} = this.props;
         return(
             
-                <p>Name:{name}</p>
+                <p>Name:{data}</p>
             
         );
     }

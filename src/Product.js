@@ -9,11 +9,11 @@ import Description from './Description';
         let {name,prise,description} = this.props;
          return(
              <>
-              <p>Name: {name}</p>
-              <p>Prise: {prise}</p>
-              <p>Description: {description}</p>   
+              <Name data = {name}/>
+              <Prise data = {prise}/>
+              <Description data = {description}/>  
              </>     
          ); 
     }
 }
-export  default Product;
+export  default Product; 
