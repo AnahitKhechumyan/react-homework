@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Button} from 'react-bootstrap';
 import idGenerator from './idGenerator';
 import NewTask from './NewTask';
-import Task from "./Task";
+import Task from './Task/Task';
+import Confirm from './Confirm';
 
 
 class ToDo extends Component {
    state = {
-      tasks:[]
+      tasks:[],
+      checkedTasks:new Set()
    }
     
 
@@ -33,14 +35,50 @@ class ToDo extends Component {
        this.setState({
           tasks:newTasks
        });
-      }
-   };  
+      };
+   };
+   handleCheck = (taskId)=> () =>{
+       const checkedTasks =new Set(this.state.checkedTasks);
+       if(checkedTasks.has(taskId)){
+       checkedTasks.delete(taskId);
+       }
+       else{
+         checkedTasks.add(taskId);
+       }
+      
+       this.setState({checkedTasks});
+   };
+
+   onRemoveSelected = ()=>{
+      const checkedTasks = new Set(this.state.checkedTasks);
+      let tasks = [...this.state.tasks];
+
+      checkedTasks.forEach(taskId =>{
+         tasks =  tasks.filter(task => task.id !== taskId);
+      });
+
+      checkedTasks.clear();
+
+      this.setState({
+         tasks,
+         checkedTasks,
+         showConfirm:false
+      });
+   };
+      toggleConfirm = () =>{
+         this.setState({
+            showConfirm:!this.state.showConfirm
+         });
+      };
+
   render(){
+     const {checkedTasks,showConfirm} = this.state;
      const tasksComponents = this.state.tasks.map((task)=>
      <Col key = {task.id}>
         <Task 
         data = {task}
         onRemove = {this.removeTask}
+        onCheck = {this.handleCheck(task.id)}
         />
     </Col>);
 
@@ -57,6 +95,21 @@ class ToDo extends Component {
          <Row>
             {tasksComponents}
          </Row>
+         <Row className='justify-content-center'>
+            <Button
+            variant = "danger"
+            disabled = {checkedTasks.size ? false : true }
+            onClick = {this.toggleConfirm}>
+               Remove selected
+            </Button>
+         </Row>
+         {
+            showConfirm &&
+            <Confirm
+            count = {checkedTasks.size}
+            onSubmit = {this.onRemoveSelected}
+            onCancel = {this.toggleConfirm}/>
+         }
        </Container>
       )
    }
