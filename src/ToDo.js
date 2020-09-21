@@ -1,60 +1,67 @@
 import React, { Component } from 'react';
-import {Container, Row, Col, Button} from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import idGenerator from './idGenerator';
 import NewTask from './NewTask';
 import Task from './Task/Task';
 import Confirm from './Confirm';
-
+import TaskModal from './TaskModal';
 
 class ToDo extends Component {
    state = {
-      tasks:[],
-      checkedTasks:new Set()
+      tasks: [],
+      checkedTasks: new Set()
    }
-    
 
-   addTask = (inputValue)=>{
+
+   addTask = (inputValue) => {
       const tasks = [...this.state.tasks];
 
       const newTask = {
-         id:idGenerator(),
+         id: idGenerator(),
          text: inputValue
       }
 
       tasks.unshift(newTask);
 
       this.setState({
-        tasks,
-        inputValue:'' 
+         tasks,
+         inputValue: ''
       });
    };
 
-   removeTask = (taskId)=>{
-      return (event)=>{
-      const newTasks = this.state.tasks.filter(task =>task.id !==taskId);
-       this.setState({
-          tasks:newTasks
-       });
+   removeTask = (taskId) => {
+      return (event) => {
+         const newTasks = this.state.tasks.filter(task => task.id !== taskId);
+         this.setState({
+            tasks: newTasks
+         });
       };
    };
-   handleCheck = (taskId)=> () =>{
-       const checkedTasks =new Set(this.state.checkedTasks);
-       if(checkedTasks.has(taskId)){
-       checkedTasks.delete(taskId);
-       }
-       else{
+
+   handleCheck = (taskId) => () => {
+      const checkedTasks = new Set(this.state.checkedTasks);
+      if (checkedTasks.has(taskId)) {
+         checkedTasks.delete(taskId);
+      }
+      else {
          checkedTasks.add(taskId);
-       }
-      
-       this.setState({checkedTasks});
+      }
+
+      this.setState({ checkedTasks });
    };
 
-   onRemoveSelected = ()=>{
+   handleEdit = (task) => {
+      this.setState({ 
+         editTask: task 
+      });
+   };
+
+   onRemoveSelected = () => {
       const checkedTasks = new Set(this.state.checkedTasks);
       let tasks = [...this.state.tasks];
 
-      checkedTasks.forEach(taskId =>{
-         tasks =  tasks.filter(task => task.id !== taskId);
+      checkedTasks.forEach(taskId => {
+         tasks = tasks.filter(task => task.id !== taskId);
       });
 
       checkedTasks.clear();
@@ -62,60 +69,84 @@ class ToDo extends Component {
       this.setState({
          tasks,
          checkedTasks,
-         showConfirm:false
+         showConfirm: false
       });
    };
-      toggleConfirm = () =>{
-         this.setState({
-            showConfirm:!this.state.showConfirm
-         });
+   toggleConfirm = () => {
+      this.setState({
+         showConfirm: !this.state.showConfirm
+      });
+   };
+
+   handleSave = (taskId, value) => {
+
+      const tasks = [...this.state.tasks];
+
+      const taskIndex = tasks.findIndex(task => task.id === taskId);
+
+      tasks[taskIndex] = {
+         ...tasks[taskIndex],
+         text: value
       };
 
-  render(){
-     const {checkedTasks,showConfirm} = this.state;
-     const tasksComponents = this.state.tasks.map((task)=>
-     <Col key = {task.id}>
-        <Task 
-        data = {task}
-        onRemove = {this.removeTask}
-        onCheck = {this.handleCheck(task.id)}
-        />
-    </Col>);
+      this.setState({
+         tasks: tasks,
+         editTask: null
+      });
+   };
 
-   return( 
-      <Container fluid>
-         <Row mt={3}>
-            <Col md={{span:6, offset:3}}>
-              <NewTask
-              onAdd = {this.addTask}
-              value ={this.state.value} 
-              />
-             </Col>
-         </Row>
-         <Row>
-            {tasksComponents}
-         </Row>
-         <Row className='justify-content-center'>
-            <Button
-            variant = "danger"
-            disabled = {checkedTasks.size ? false : true }
-            onClick = {this.toggleConfirm}>
-               Remove selected
+   render() {
+      const { checkedTasks, tasks, showConfirm, editTask } = this.state;
+      const tasksComponents = tasks.map((task) =>
+         <Col key={task.id}>
+            <Task
+               data={task}
+               onRemove={this.removeTask}
+               onCheck={this.handleCheck(task.id)}
+               onEdit={this.handleEdit(task)}/>
+         </Col>
+      );
+
+      return (
+         <Container fluid>
+            <Row >
+               <Col md={{ span: 6, offset: 3 }}>
+                  <NewTask
+                     onAdd={this.addTask}
+                     value={this.state.value}
+                  />
+               </Col>
+            </Row>
+            <Row>
+               {tasksComponents}
+            </Row>
+            <Row className='justify-content-center'>
+               <Button
+                  variant="danger"
+                  disabled={checkedTasks.size ? false : true}
+                  onClick={this.toggleConfirm}>
+                  Remove selected
             </Button>
-         </Row>
-         {
-            showConfirm &&
-            <Confirm
-            count = {checkedTasks.size}
-            onSubmit = {this.onRemoveSelected}
-            onCancel = {this.toggleConfirm}/>
-         }
-       </Container>
+            </Row>
+            { showConfirm &&
+               <Confirm
+                  count={checkedTasks.size}
+                  onSubmit={this.onRemoveSelected}
+                  onCancel={this.toggleConfirm}
+               />
+            }
+            {  !!editTask &&
+               <TaskModal
+                  value={editTask}
+                  onSave={this.handleSave}
+                  onCancle={this.handleEdit(null)}
+               />
+            }
+         </Container>
       )
    }
 }
 export default ToDo;
- 
-       
-         
- 
+
+
+
