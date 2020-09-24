@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
-import idGenerator from './idGenerator';
+import idGenerator from '../idGenerator';
 import NewTask from './NewTask';
 import Task from './Task/Task';
 import Confirm from './Confirm';
+import TaskModal from './TaskModal';
+
 
 
 class ToDo extends Component {
    state = {
       tasks:[],
-      checkedTasks:new Set()
+      checkedTasks:new Set(),
+      showConfirm:false,
+      editTask:null
    }
     
 
@@ -48,6 +52,10 @@ class ToDo extends Component {
       
        this.setState({checkedTasks});
    };
+    
+   handleEdit = (task) =>() =>{
+      this.setState({editTask: task});
+  };
 
    onRemoveSelected = ()=>{
       const checkedTasks = new Set(this.state.checkedTasks);
@@ -71,24 +79,40 @@ class ToDo extends Component {
          });
       };
 
+      handleSave = (taskId, value) =>{
+        const tasks = [...this.state.tasks];
+        const taskIndex = tasks.findIndex(task => task.id ===taskId);
+        tasks[taskIndex] = {
+           ...tasks[taskIndex],
+           text: value
+        };
+
+          this.setState({
+             tasks: tasks,
+             editTask:null
+          });
+      };
+
   render(){
-     const {checkedTasks,showConfirm} = this.state;
+     const {checkedTasks, showConfirm, editTask} = this.state;
      const tasksComponents = this.state.tasks.map((task)=>
      <Col key = {task.id}>
         <Task 
-        data = {task}
-        onRemove = {this.removeTask}
-        onCheck = {this.handleCheck(task.id)}
+              data = {task}
+              onRemove = {this.removeTask}
+              onCheck = {this.handleCheck(task.id)}
+              onEdit = {this.handleEdit(task)}
+              disabled = {!!checkedTasks.size}
         />
     </Col>);
 
    return( 
-      <Container fluid>
+      <Container fluid ={true}>
          <Row mt={3}>
             <Col md={{span:6, offset:3}}>
               <NewTask
               onAdd = {this.addTask}
-              value ={this.state.value} 
+              disabled = {!!checkedTasks.size} 
               />
              </Col>
          </Row>
@@ -98,17 +122,23 @@ class ToDo extends Component {
          <Row className='justify-content-center'>
             <Button
             variant = "danger"
-            disabled = {checkedTasks.size ? false : true }
+            disabled = {!checkedTasks.size}
             onClick = {this.toggleConfirm}>
                Remove selected
             </Button>
          </Row>
-         {
-            showConfirm &&
+         { showConfirm &&
             <Confirm
             count = {checkedTasks.size}
             onSubmit = {this.onRemoveSelected}
             onCancel = {this.toggleConfirm}/>
+         }
+         { !!editTask &&
+             <TaskModal 
+             value = {editTask}
+             onSave = {this.handleSave}
+             onCancel = {this.handleEdit(null)}
+             />
          }
        </Container>
       )
