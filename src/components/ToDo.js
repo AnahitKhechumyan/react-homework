@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
-//import idGenerator from '../idGenerator';
 import NewTask from './NewTask';
 import Task from './Task/Task';
 import Confirm from './Confirm';
@@ -16,13 +15,7 @@ class ToDo extends Component {
       editTask:null
    }
    componentDidMount(){
-     {/* const data={
-         title: inputValue,
-         description: 'todo title',
-         date: Date()
-      };*/}
 
-   
       fetch(' http://localhost:3001/task ', {
          method: 'GET',
          headers:{
@@ -36,7 +29,7 @@ class ToDo extends Component {
          }
          this.setState({
             task
-         });
+         });  
           
         })
         .catch((err) =>{
@@ -50,20 +43,6 @@ class ToDo extends Component {
       const data = {
          title: inputValue
       }
-
-      {/*tasks.unshift(newTask);
-
-      this.setState({
-        tasks,
-        inputValue:'' 
-      });*/}
-   
-
-     {/* const data={
-         title: inputValue,
-         description: 'todo title',
-         date: Date()
-      };*/} 
 
 
       fetch(' http://localhost:3001/task ', {
@@ -159,25 +138,26 @@ class ToDo extends Component {
        
          return( 
             <Container fluid ={true}>
-                 <Row >
+               <Row >
                   <Col md={{span:6, offset:3}}>
                    <NewTask
                     onAdd = {this.addTask}
                     disabled = {!!checkedTasks.size} 
                    />
                   </Col>
-                  </Row>
-                  <Row>
+                </Row>
+                <Row>
                       {tasksComponents}
-                  </Row>
-                  <Row className='justify-content-center'>
+                </Row>
+               <Row className='justify-content-center'>
                     <Button
                      variant = "danger"
                      disabled = {!checkedTasks.size}
                      onClick = {this.toggleConfirm}>
                       Remove selected
                      </Button>
-                    </Row>
+                </Row>
+                
                     { showConfirm &&
                       <Confirm
                        count = {checkedTasks.size}
