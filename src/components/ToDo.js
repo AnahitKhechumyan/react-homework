@@ -42,9 +42,10 @@ class ToDo extends Component {
         .catch((err) =>{
           console.log('err',err);    
         });
-     };  
-   }
-   addTask = (inputValue)=>{
+     };
+     
+     
+     addTask = (inputValue)=>{
       
 
       const data = {
@@ -85,7 +86,8 @@ class ToDo extends Component {
       .catch((err) =>{
          console.log('err',err);    
        });
-   
+   };
+
    removeTask = (taskId)=>() =>{
       const newTasks = this.state.tasks.filter(task =>task._id !==taskId);
        this.setState({
@@ -143,58 +145,65 @@ class ToDo extends Component {
              editTask:null
           });
        };
+    
+
        render(){
-        const {checkedTasks,tasks,  showConfirm, editTask} = this.state;
-        const tasksComponents =tasks.map((task)=>
-           <Col key = {task._id}>
-           <Task 
-              data = {task}
-              onRemove = {this.removeTask}
-              onCheck = {this.handleCheck(task._id)}
-              onEdit = {this.handleEdit(task)}
-              disabled = {!!checkedTasks.size}
-           />
-           </Col>
-        );
-       
-         return( 
-            <Container fluid ={true}>
-                 <Row >
-                  <Col md={{span:6, offset:3}}>
-                   <NewTask
-                    onAdd = {this.addTask}
-                    disabled = {!!checkedTasks.size} 
-                   />
-                  </Col>
-                  </Row>
-                  <Row>
-                      {tasksComponents}
-                  </Row>
-                  <Row className='justify-content-center'>
-                    <Button
-                     variant = "danger"
-                     disabled = {!checkedTasks.size}
-                     onClick = {this.toggleConfirm}>
-                      Remove selected
-                     </Button>
-                    </Row>
-                    { showConfirm &&
-                      <Confirm
-                       count = {checkedTasks.size}
-                       onSubmit = {this.onRemoveSelected}
-                       onCancel = {this.toggleConfirm}/>
-                     }
-                     { !!editTask &&
-                       <TaskModal 
-                        value = {editTask}
-                       onSave = {this.handleSave}
-                       onCancel = {this.handleEdit(null)}
-                     />
-                  }
-             </Container>
+         const {checkedTasks,tasks,  showConfirm, editTask} = this.state;
+         const tasksComponents =tasks.map((task)=>
+            <Col key = {task._id}>
+            <Task 
+               data = {task}
+               onRemove = {this.removeTask}
+               onCheck = {this.handleCheck(task._id)}
+               onEdit = {this.handleEdit(task)}
+               disabled = {!!checkedTasks.size}
+            />
+            </Col>
          );
-      }
+        
+          return( 
+             <Container fluid ={true}>
+                  <Row >
+                   <Col md={{span:6, offset:3}}>
+                    <NewTask
+                     onAdd = {this.addTask}
+                     disabled = {!!checkedTasks.size} 
+                    />
+                   </Col>
+                   </Row>
+                   <Row>
+                       {tasksComponents}
+                   </Row>
+                   <Row className='justify-content-center'>
+                     <Button
+                      variant = "danger"
+                      disabled = {!checkedTasks.size}
+                      onClick = {this.toggleConfirm}>
+                       Remove selected
+                      </Button>
+                     </Row>
+                     { showConfirm &&
+                       <Confirm
+                        count = {checkedTasks.size}
+                        onSubmit = {this.onRemoveSelected}
+                        onCancel = {this.toggleConfirm}/>
+                      }
+                      { !!editTask &&
+                        <TaskModal 
+                         value = {editTask}
+                        onSave = {this.handleSave}
+                        onCancel = {this.handleEdit(null)}
+                      />
+                   }
+              </Container>
+          );
+       }
+
    }
+   
+   
+       
+   
   export default ToDo;
  
        
