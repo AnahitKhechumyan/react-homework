@@ -1,54 +1,67 @@
 import React, { PureComponent } from 'react';
-import {InputGroup, FormControl, Button } from 'react-bootstrap';
+import { FormControl, Button, Modal } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 class NewTask extends PureComponent {
     state = {
-        inputValue: ''
-    }
+        title: ''
+    };
+
     handleChange = (event)=>{
        this.setState({
-          inputValue:event.target.value
+          title: event.target.value
        });
     };
     handleKeyDown = (event) => {
         if (event.key === 'Enter') {
-            this.sendValue();
+        event.preventDefault();
+         this.handleSave();
         }
     };
-    sendValue = () => {
-        const { inputValue } = this.state;
-        if (!inputValue) {
-            return;
-        }
-        this.props.onAdd(inputValue);
-        this.setState({ 
-            inputValue: ''
-         });
-    }
+
+     handleSave = () =>{
+         const {title} = this.state;
+         if(title){
+          this.props.onAdd(title);
+         }
+     }
+    
     render() {
-        const {disabled} = this.props;
         return(
-        <InputGroup className="my-3">
-            <FormControl
-                value={this.state.inputValue}
+            <Modal
+        size = "lg"
+        aria-labelledby = "contained-modal-title-vcenter"
+        centered
+        show = {true}   
+        onHide = {this.props.onCancel}
+        >
+        <Modal.Header closeButton>
+            <Modal.Title id = "contained-modal-title-vcenter">
+                Add new task
+            </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <FormControl
+                value={this.state.title}
                 onChange={this.handleChange}
                 onKeyDown={this.handleKeyDown}
                 placeholder="Input task"
                 aria-label="Input task"
                 aria-describedby="basic-addon2"
-                disabled = {disabled}
             />
-            <InputGroup.Append>
-                <Button
-                    onClick={this.sendValue}
-                    variant="outline-primery"
-                    disabled = {disabled}
-                >
-                    Add 
-               </Button>
-            </InputGroup.Append>
-        </InputGroup>
+        </Modal.Body>
+        <Modal.Footer>
+            <Button onClick = {this.handleSave} variant = 'success'>Add</Button>
+            <Button onClick = {this.props.onCancel} variant = 'secondary'>Cancel</Button>
+        </Modal.Footer>    
+        </Modal>
         );
     }
 }
-   export default NewTask;
+
+NewTask.propTypes = {
+      onAdd: PropTypes.func.isRequired,
+      onCancel: PropTypes.func.isRequired
+};
+
+export default NewTask;
