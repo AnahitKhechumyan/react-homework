@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
-import NewTask from './NewTask';
+import NewTask from './NewTask/NewTask';
 import Task from './Task/Task';
 import Confirm from './Confirm';
 import TaskModal from './TaskModal';
@@ -35,17 +35,11 @@ class ToDo extends Component {
           
         })
         .catch((err) =>{
-          console.log('err',err);    
+          //console.log('err',err);    
         });
      };  
 
-   addTask = (inputValue)=>{
-      
-
-      const data = {
-         title: inputValue
-      }
-
+   addTask = (data)=>{
 
       fetch(' http://localhost:3001/task ', {
          method: 'POST',
@@ -65,7 +59,7 @@ class ToDo extends Component {
          });
       })
       .catch((err) =>{
-         console.log('err',err);    
+         //console.log('err',err);    
        });
       };
    removeTask = (taskId)=>() =>{
@@ -148,7 +142,7 @@ class ToDo extends Component {
          return( 
             <Container fluid ={true}>
                <Row >
-                  <Col md={{span:6, offset:3}}>
+                  <Col md={{span:6, offset:3}} className = "text-center">
                      <Button
                      variant = "primary"
                      className = 'm-3'
