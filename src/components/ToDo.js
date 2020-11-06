@@ -63,10 +63,26 @@ class ToDo extends Component {
        });
       };
    removeTask = (taskId)=>() =>{
-      const newTasks = this.state.tasks.filter(task =>task._id !==taskId);
-       this.setState({
+      fetch(`http://localhost:3001/task/${taskId}`, {
+         method: 'DELETE',
+         headers:{
+            "Content-Type": 'application/json',
+         }
+         })
+      .then((response)=> response.json())
+      .then((task)=>{
+         if(task.error){
+            throw task.error;
+         }
+          const newTasks = this.state.tasks.filter(task =>task._id !==taskId);
+          this.setState({
           tasks:newTasks
        }); 
+      })
+      .catch((err) =>{
+         //console.log('err',err);    
+       });
+      
    };
    handleCheck = (taskId)=> () =>{
        const checkedTasks =new Set(this.state.checkedTasks);
@@ -86,7 +102,23 @@ class ToDo extends Component {
    
    onRemoveSelected = ()=>{
       const checkedTasks = new Set(this.state.checkedTasks);
-      let tasks = [...this.state.tasks];
+
+      fetch(`http://localhost:3001/task/`, {
+         method: 'DELETE',
+         body: JSON.stringify({
+            tasks:[...checkedTasks]
+         }),
+         headers:{
+            "Content-Type": 'application/json',
+         }
+       })
+      .then((response)=> response.json())
+      .then((data)=>{
+         if(data.error){
+            throw data.error;
+         }
+         
+                let tasks = [...this.state.tasks];
 
       checkedTasks.forEach(taskId =>{
          tasks =  tasks.filter(task => task._id !== taskId);
@@ -99,7 +131,15 @@ class ToDo extends Component {
          checkedTasks,
          showConfirm:false
       });
+
+   })
+   .catch((err) =>{
+      //console.log('err',err);    
+    });
+   
    };
+
+
       toggleConfirm = () =>{
          this.setState({
             showConfirm:!this.state.showConfirm

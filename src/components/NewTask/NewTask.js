@@ -9,10 +9,35 @@ class NewTask extends PureComponent {
     state = {
         title: '',
         description: '',
-        date: new Date()
+        date: new Date(),
+        valid: true,
+        validationType: null
     };
 
+    validationErrors = {
+        requiredError: 'The field is required!',
+        lengthError: 'The Title length should be less then 50 characters'
+    }
+
     handleChange = (type, value)=>{
+       if(type === 'title' && !this.state.valid){
+           this.setState({
+                [type]:value,
+                valid: true
+           }); 
+           return;
+       }
+
+       if(type === 'title'){
+           if(value.length > 50){
+            this.setState({
+                valid:false,
+                validationType:'lengthError'
+             });
+             return; 
+           }
+       }
+
        this.setState({
           [type]:value
        });
@@ -25,8 +50,24 @@ class NewTask extends PureComponent {
     };
 
      handleSave = () =>{
-         const {title, description, date} = this.state;
-         if(!title) return;
+         let {title, description, date} = this.state;
+         title = title.trim()
+         ;
+         if(!title){
+             this.setState({
+                 valid: false,
+                 validationType: 'requiredError'
+             });
+            return; 
+         };
+
+         if(title.length > 50){
+            this.setState({
+                valid: false,
+                validationType: 'lengthError'
+            });
+            return; 
+         }
         
         const data = {
             title,
@@ -38,6 +79,11 @@ class NewTask extends PureComponent {
      }
     
     render() {
+        const {valid, validationType} = this.state;
+        let errorMessage = '';
+    if(!valid){
+        errorMessage = this.validationErrors[validationType];
+    }
         return(
             <Modal
         size = "lg"
@@ -52,21 +98,26 @@ class NewTask extends PureComponent {
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <FormControl
-                value={this.state.title}
-                onChange ={(event) =>this.handleChange('title', event.target.value)}
-                onKeyDown={this.handleKeyDown}
-                placeholder="Title"
-                aria-label="Title"
-                aria-describedby="basic-addon2"
-            />
-                  <Form.Control
+            <Form.Group controlId="exampleForm.ControlInput1"> 
+                <Form.Label className ={"text-danger"} > {errorMessage} </Form.Label>
+                <FormControl
+                     className = {!valid ? styles.invalid: null}
+                     value={this.state.title}
+                     onChange ={(event) =>this.handleChange('title', event.target.value)}
+                     onKeyDown={this.handleKeyDown}
+                     placeholder="Title"
+                     aria-label="Title"
+                     aria-describedby="basic-addon2"
+               />
+            </Form.Group>
+
+             <Form.Control
                    as = "textarea"
                    rows = {3}
                    placeholder = "Dascription"
                    className = "my-3"
                    onChange ={(event) =>this.handleChange('description', event.target.value)}
-                   />
+             />
                    <div
                     className = {styles.datePicker}
                     >
