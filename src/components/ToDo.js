@@ -3,7 +3,7 @@ import {Container, Row, Col, Button} from 'react-bootstrap';
 import NewTask from './NewTask/NewTask';
 import Task from './Task/Task';
 import Confirm from './Confirm';
-import TaskModal from './TaskModal';
+import EditTaskModal from './EditTaskModal';
 
 
 
@@ -104,7 +104,7 @@ class ToDo extends Component {
       const checkedTasks = new Set(this.state.checkedTasks);
 
       fetch(`http://localhost:3001/task/`, {
-         method: 'DELETE',
+         method: 'PATCH',
          body: JSON.stringify({
             tasks:[...checkedTasks]
          }),
@@ -146,18 +146,28 @@ class ToDo extends Component {
          });
       };
 
-      handleSave = (taskId, value) =>{
-        const tasks = [...this.state.tasks];
-        const taskIndex = tasks.findIndex(task => task._id ===taskId);
-        tasks[taskIndex] = {
-           ...tasks[taskIndex],
-           text: value
-        };
+      handleSave = (taskId, data) =>{
+         fetch( `http://localhost:3001/task/${taskId}`, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers:{
+               "Content-Type": 'application/json',
+            }
+            })
+         .then((response)=> response.json())
+         .then((editedtask)=>{
+            if(editedtask.error){
+               throw editedtask.error;
+            }
+            const tasks = [...this.state.tasks];
+                 const foundIndex = tasks.findIndex(task => task._id === editedtask._id );
+                 tasks[foundIndex] = editedtask;
 
-          this.setState({
-             tasks: tasks,
-             editTask:null
-          });
+              this.setState({tasks, editTask: null});
+         })
+         .catch((err) =>{
+              //console.log('err',err);    
+         });
        };
 
        toggleNewTaskModal = ()=>{
@@ -168,7 +178,7 @@ class ToDo extends Component {
        render(){
         const {checkedTasks,tasks,  showConfirm, editTask} = this.state;
         const tasksComponents =tasks.map((task)=>
-           <Col key = {task._id}>
+           <Col key = {task._id} xs={12} sm={6} md={4} lg={3} xl={2}>
            <Task 
               data = {task}
               onRemove = {this.removeTask}
@@ -193,17 +203,18 @@ class ToDo extends Component {
                   </Col>
                 </Row>
 
-                <Row>
-                      {tasksComponents}
-                </Row>
-
-               <Row className='justify-content-center'>
+                <Row className='justify-content-center'>
                     <Button
                      variant = "danger"
                      disabled = {!checkedTasks.size}
                      onClick = {this.toggleConfirm}>
                       Remove selected
                      </Button>
+                </Row>
+                
+
+                <Row>
+                      {tasksComponents}
                 </Row>
                 
                     { showConfirm &&
@@ -213,8 +224,9 @@ class ToDo extends Component {
                        onCancel = {this.toggleConfirm}/>
                      }
                      { !!editTask &&
-                       <TaskModal 
+                       <EditTaskModal 
                         value = {editTask}
+                        data = {editTask}
                        onSave = {this.handleSave}
                        onCancel = {this.handleEdit(null)}
                      />
