@@ -16,7 +16,7 @@ function App() {
     <Switch>
       
        <Route path = '/' exact component  = {ToDo}/>
-       <Route path = '/task' exact component  = { SingleTask}/>
+       <Route path = '/task/:id' exact component  = { SingleTask}/>
        <Route path = '/About' exact component  = {Info}/>
        <Route path = '/Contact' exact component  = {Contact}/>
        <Route path = '/not-found' exact component  = {NotFound}/>

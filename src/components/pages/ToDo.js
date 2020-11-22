@@ -25,19 +25,19 @@ class ToDo extends Component {
          }
       })
       .then((response)=> response.json())
-      .then((task)=>{
-         if(task.error){
-            throw task.error;
+      .then((tasks)=>{
+         if(tasks.error){
+            throw tasks.error;
          }
          this.setState({
-            task
+            tasks
          });  
           
         })
         .catch((err) =>{
           //console.log('err',err);    
         });
-     };  
+     } 
 
    addTask = (data)=>{
 
@@ -62,6 +62,7 @@ class ToDo extends Component {
          //console.log('err',err);    
        });
       };
+
    removeTask = (taskId)=>() =>{
       fetch(`http://localhost:3001/task/${taskId}`, {
          method: 'DELETE',
@@ -155,13 +156,13 @@ class ToDo extends Component {
             }
             })
          .then((response)=> response.json())
-         .then((editedtask)=>{
-            if(editedtask.error){
-               throw editedtask.error;
+         .then((editedTask)=>{
+            if(editedTask.error){
+               throw editedTask.error;
             }
             const tasks = [...this.state.tasks];
-                 const foundIndex = tasks.findIndex(task => task._id === editedtask._id );
-                 tasks[foundIndex] = editedtask;
+                 const foundIndex = tasks.findIndex(task => task._id === editedTask._id );
+                 tasks[foundIndex] = editedTask;
 
               this.setState({tasks, editTask: null});
          })
@@ -225,7 +226,6 @@ class ToDo extends Component {
                      }
                      { !!editTask &&
                        <EditTaskModal 
-                        value = {editTask}
                         data = {editTask}
                        onSave = {this.handleSave}
                        onCancel = {this.handleEdit(null)}
