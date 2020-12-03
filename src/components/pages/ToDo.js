@@ -4,7 +4,7 @@ import NewTask from '../NewTask/NewTask';
 import Task from '../Task/Task';
 import Confirm from '../Confirm';
 import EditTaskModal from '../EditTaskModal';
-
+import {connect} from 'react-redux';
 
 
 class ToDo extends Component {
@@ -237,12 +237,31 @@ class ToDo extends Component {
                      onCancel = {this.toggleNewTaskModal} 
                     />
                   }
+
+                  <div>number-----{this.props.number}</div>
+                  <button
+                  onClick = {()=>this.props.changeCount(25)}
+                  >Change count</button>
+
              </Container>
          );
       }
    }
-  export default ToDo;
- 
+  //export default ToDo;
+   const mapStateToProps = (state)=>{
+      return{
+         connected: state.connected,
+         number: state.count
+      }
+   };
+
+   const mapDispatchToProps = (dispatch) =>{
+      return{
+      changeCount:(value) => {dispatch({type: 'CHANGE_COUNT', value})}
+      }
+   };
+
+   export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
        
          
  
