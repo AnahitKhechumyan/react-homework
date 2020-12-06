@@ -5,7 +5,7 @@ import Task from '../Task/Task';
 import Confirm from '../Confirm';
 import EditTaskModal from '../EditTaskModal';
 import {connect} from 'react-redux';
-
+import {getTasks} from '../../store/actions';
 
 class ToDo extends Component {
    state = {
@@ -17,31 +17,32 @@ class ToDo extends Component {
    }
 
    componentDidMount(){
+      this.props.getTasks();
 
-      fetch(' http://localhost:3001/task ', {
-         method: 'GET',
-         headers:{
-            "Content-Type": 'application/json',
-         }
-      })
-      .then((response)=> response.json())
-      .then((tasks)=>{
-         if(tasks.error){
-            throw tasks.error;
-         }
-         this.setState({
-            tasks
-         });  
+      //fetch('http://localhost:3001/task ', {
+      //   method: 'GET',
+      //   headers:{
+      //      "Content-Type": 'application/json',
+     //    }
+     // })
+    //  .then((response)=> response.json())
+    //  .then((tasks)=>{
+      //   if(tasks.error){
+      //      throw tasks.error;
+      //   }
+      //   this.setState({
+      //      tasks
+      //   });  
           
-        })
-        .catch((err) =>{
+     //   })
+     //   .catch((err) =>{
           //console.log('err',err);    
-        });
+     //   });
      } 
 
    addTask = (data)=>{
-
-      fetch(' http://localhost:3001/task ', {
+     // request('http://localhost:3001/task', 'POST', data)
+      fetch('http://localhost:3001/task', {
          method: 'POST',
          body: JSON.stringify(data),
          headers:{
@@ -177,7 +178,9 @@ class ToDo extends Component {
          });
        };
        render(){
-        const {checkedTasks,tasks,  showConfirm, editTask} = this.state;
+        const {checkedTasks, showConfirm, editTask} = this.state;
+        const {tasks} = this.props;
+        
         const tasksComponents =tasks.map((task)=>
            <Col key = {task._id} xs={12} sm={6} md={4} lg={3} xl={2}>
            <Task 
@@ -250,16 +253,18 @@ class ToDo extends Component {
   //export default ToDo;
    const mapStateToProps = (state)=>{
       return{
-         connected: state.connected,
-         number: state.count
-      }
+         tasks: state.tasks
+      };
    };
 
-   const mapDispatchToProps = (dispatch) =>{
-      return{
-      changeCount:(value) => {dispatch({type: 'CHANGE_COUNT', value})}
-      }
-   };
+  // const mapDispatchToProps = (dispatch) =>{
+  //    return{
+  //    changeCount:(value) => {dispatch({type: 'CHANGE_COUNT', value})}
+  //    }
+  // };
+   const mapDispatchToProps = {
+      getTasks: getTasks
+   }
 
    export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
        

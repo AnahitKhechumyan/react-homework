@@ -1,16 +1,13 @@
 const defaultState = {
-    test: true,
-    value:10,
-    connected:true,
-    count:50
+    tasks: [] ,
   };
 
   export const mainReducer = (state = defaultState, action)=>{
     switch(action.type){
-      case 'CHANGE_COUNT':{
+      case 'GET_TASKS_SUCCESS':{
         return{
           ...state,
-          count: state.count + action.value
+          tasks: action.tasks
         }
       }
      default: return state;
