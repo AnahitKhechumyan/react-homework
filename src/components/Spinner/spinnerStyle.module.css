@@ -3,6 +3,7 @@
      height: 100vh;
      background:rgb(251, 252, 253);
      position: absolute;
+     z-index: 9999999;
      top:0;
      left:0;
      display:flex;
