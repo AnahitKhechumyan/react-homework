@@ -5,7 +5,7 @@ import Task from '../Task/Task';
 import Confirm from '../Confirm';
 import EditTaskModal from '../EditTaskModal';
 import {connect} from 'react-redux';
-import {getTasks} from '../../store/actions';
+import {getTasks, removeTasks} from '../../store/actions';
 
 class ToDo extends PureComponent  {
    state = {
@@ -23,32 +23,22 @@ class ToDo extends PureComponent  {
       if(!prevProps.addTaskSuccess && this.props.addTaskSuccess){
          this.setState({
             openNewTaskModal: false
-         })
+         });
+      }
+
+      if(!prevProps.removeTasksSuccess && this.props.removeTasksSuccess){
+         this.setState({
+            showConfirm: false,
+            checkedTasks: new Set()
+         });
+      }
+      if(!prevProps.editTaskSuccess && this.props.editTaskSuccess){
+         this.setState({
+            editTask: null
+         });
       }
      }  
 
-   removeTask = (taskId)=>() =>{
-      fetch(`http://localhost:3001/task/${taskId}`, {
-         method: 'DELETE',
-         headers:{
-            "Content-Type": 'application/json',
-         }
-         })
-      .then((response)=> response.json())
-      .then((task)=>{
-         if(task.error){
-            throw task.error;
-         }
-          const newTasks = this.state.tasks.filter(task =>task._id !==taskId);
-          this.setState({
-          tasks:newTasks
-       }); 
-      })
-      .catch((err) =>{
-         //console.log('err',err);    
-       });
-   
-   };
    handleCheck = (taskId)=> () =>{
        const checkedTasks =new Set(this.state.checkedTasks);
        if(checkedTasks.has(taskId)){
@@ -66,41 +56,10 @@ class ToDo extends PureComponent  {
   };
    
    onRemoveSelected = ()=>{
-      const checkedTasks = new Set(this.state.checkedTasks);
-
-      fetch(`http://localhost:3001/task/`, {
-         method: 'PATCH',
-         body: JSON.stringify({
-            tasks:[...checkedTasks]
-         }),
-         headers:{
-            "Content-Type": 'application/json',
-         }
-       })
-      .then((response)=> response.json())
-      .then((data)=>{
-         if(data.error){
-            throw data.error;
-         }
-         
-                let tasks = [...this.state.tasks];
-
-      checkedTasks.forEach(taskId =>{
-         tasks =  tasks.filter(task => task._id !== taskId);
-      });
-
-      checkedTasks.clear();
-
-      this.setState({
-         tasks,
-         checkedTasks,
-         showConfirm:false
-      });
-
-   })
-   .catch((err) =>{
-      //console.log('err',err);    
-    });
+      const checkedTasks = [...this.state.checkedTasks];
+      this.props.removeTasks({
+         tasks:checkedTasks
+      }); 
    
    };
 
@@ -111,35 +70,13 @@ class ToDo extends PureComponent  {
          });
       };
 
-      handleSave = (taskId, data) =>{
-         fetch( `http://localhost:3001/task/${taskId}`, {
-            method: 'PUT',
-            body: JSON.stringify(data),
-            headers:{
-               "Content-Type": 'application/json',
-            }
-            })
-         .then((response)=> response.json())
-         .then((editedTask)=>{
-            if(editedTask.error){
-               throw editedTask.error;
-            }
-            const tasks = [...this.state.tasks];
-                 const foundIndex = tasks.findIndex(task => task._id === editedTask._id );
-                 tasks[foundIndex] = editedTask;
-
-              this.setState({tasks, editTask: null});
-         })
-         .catch((err) =>{
-              //console.log('err',err);    
-         });
-       };
 
        toggleNewTaskModal = ()=>{
          this.setState({
             openNewTaskModal: !this.state.openNewTaskModal
          });
        };
+
        render(){
          
         const {checkedTasks, showConfirm, editTask} = this.state;
@@ -149,7 +86,6 @@ class ToDo extends PureComponent  {
            <Col key = {task._id} xs={12} sm={6} md={4} lg={3} xl={2}>
            <Task 
               data = {task}
-              onRemove = {this.removeTask}
               onCheck = {this.handleCheck(task._id)}
               onEdit = {this.handleEdit(task)}
               disabled = {!!checkedTasks.size}
@@ -216,13 +152,16 @@ class ToDo extends PureComponent  {
    const mapStateToProps = (state)=>{
       return{
          tasks: state.tasks,
-         addTaskSuccess: state.addTaskSuccess
+         addTaskSuccess: state.addTaskSuccess,
+         removeTasksSuccess: state.removeTasksSuccess,
+         editTaskSuccess: state.editTaskSuccess,
 
       };
    };
 
    const mapDispatchToProps = {
-      getTasks: getTasks
+      getTasks,
+      removeTasks 
    }
 
    export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
