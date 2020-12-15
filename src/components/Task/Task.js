@@ -6,6 +6,7 @@ import styles from './task.module.css';
 import {Link} from 'react-router-dom';
 import {removeTask} from '../../store/actions';
 import {connect} from 'react-redux';
+import {formatDate, shortStr} from '../../helpers/utils';
 import PropTypes from  'prop-types';
 
  
@@ -49,10 +50,13 @@ class Task extends PureComponent{
               <Card.Title>{data.title} </Card.Title>
               </Link>
              <Card.Text>
-                Description: {data.description}
+                Description: {shortStr(data.description, 25)}
              </Card.Text>
              <Card.Text>
-                 Date: {data.date ? data.date.slice(0, 10) : 'none'}
+                 Date: {formatDate(data.date)}
+             </Card.Text>
+             <Card.Text>
+                 Created: {formatDate(data.created_at)}
              </Card.Text>
                
              <OverlayTrigger

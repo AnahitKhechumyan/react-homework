@@ -78,8 +78,9 @@ class EditTaskModal extends PureComponent {
            description,
            date: date.toISOString().slice(0, 10)
         };
-
-        this.props.editTask(_id,data);
+        
+        const {editTask, from} = this.props;
+        editTask(_id,data, from);
     }
    
    render() {
@@ -144,7 +145,8 @@ class EditTaskModal extends PureComponent {
 
 EditTaskModal.propTypes = {
      data: PropTypes.object.isRequired,
-     onCancel: PropTypes.func.isRequired 
+     onCancel: PropTypes.func.isRequired,
+     from:PropTypes.oneOf(['single','tasks']) 
 };
 
 const mapDispatchToProps = {
