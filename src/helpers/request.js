@@ -17,10 +17,8 @@ function request(url, method='GET', body){
             throw result.error;
          }
           return result;
-        })
-        .catch((err) =>{
-          //console.log('err',err);    
         });
+         
 }
 
 

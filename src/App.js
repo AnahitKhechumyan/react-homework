@@ -1,18 +1,37 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import ToDo from './components/pages/ToDo';
 import {Route, Switch, Redirect}  from 'react-router-dom';
 import SingleTask from './components/pages/SingleTask';
 import NotFound from './components/pages/NotFound';
+import Spinner from './components/Spinner/Spinner';
 import Info from './components/pages/Info';
 import Contact from './components/pages/Contact';
 import NavMenu from './components/NavMenu';
+import {ToastContainer, toast} from 'react-toastify';
+import {connect} from 'react-redux';
 
-function App() {
+class  App extends PureComponent{
+componentDidUpdate(){
+  const {errorMessage, successMessage} = this.props; 
+  if(errorMessage){
+    toast.error(errorMessage);
+  }
+  if(successMessage){
+    toast.success(successMessage);
+  }
+
+}
+  render(){
+    const {showSpinner} = this.props;
+
   return (
-  <div className = 'app'>
-     < NavMenu/>
+    <>
+      <div className = 'app'>
+
+    < NavMenu/>
     <Switch>
       
        <Route path = '/' exact component  = {ToDo}/>
@@ -22,8 +41,32 @@ function App() {
        <Route path = '/not-found' exact component  = {NotFound}/>
        <Redirect to='/not-found'/>
 
-    </Switch>  
-  </div>
+    </Switch>
+
+    <ToastContainer
+    position="bottom-left"
+    autoClose={3000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    />  
+    </div>
+    {showSpinner && <Spinner/>}
+    </>
   );
-};
-export default App;
+ }
+}
+
+const mapStateToProps = (state)=>{
+return{
+    errorMessage: state.error,
+    successMessage: state.successMessage,
+    showSpinner: state.loading
+ }
+}
+
+export default connect(mapStateToProps)(App);
