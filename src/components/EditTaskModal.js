@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef} from 'react';
 import { FormControl, Button, Modal, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import DatePicker  from 'react-datepicker';
@@ -17,7 +17,13 @@ class EditTaskModal extends PureComponent {
             valid:true,
             validationType: null
         };
+        this.titleRef = createRef();
     }
+
+    componentDidMount(){
+        this.titleRef.current.focus();
+    }
+    
 
     validationErrors = {
         requiredError: 'The field is required!',
@@ -113,6 +119,7 @@ class EditTaskModal extends PureComponent {
                     placeholder="Title"
                     aria-label="Title"
                     aria-describedby="basic-addon2"
+                    ref = {this.titleRef}
               />
            </Form.Group>
 
