@@ -18,7 +18,7 @@ class NewTask extends PureComponent {
             validationType: null
        };
        this.titleRef = createRef();
-    }
+    };
     
     componentDidMount(){
         this.titleRef.current.focus();
