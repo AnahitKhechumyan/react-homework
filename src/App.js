@@ -42,7 +42,7 @@ componentDidUpdate(){
        <Redirect to='/not-found'/>
 
     </Switch>
-
+ 
     <ToastContainer
     position="bottom-left"
     autoClose={3000}
@@ -53,9 +53,10 @@ componentDidUpdate(){
     pauseOnFocusLoss
     draggable
     pauseOnHover
-    />  
-    </div>
-    {showSpinner && <Spinner/>}
+   />
+
+     </div>
+      {showSpinner && <Spinner/>}
     </>
   );
  }
