@@ -159,10 +159,47 @@ const defaultState = {
             tasks: tasks
          };
         }
-
-        
      }
      
+     case actionTypes.CHANGING_TASK_STATUS:{
+      return loadingState;
+    }
+
+    case actionTypes.CHANG_TASK_STATUS_SUCCESS:{
+      let message;
+
+      if(action.status === 'done'){
+        message = 'Congratulations, you have completed the task 🎉 !!! ';
+      }
+
+      else{
+        message = 'The task is active now!!!';
+      }
+      const newState = {
+        ...state,
+        loading: false,
+        successMessage: message,
+      }
+
+      if(action.from === 'single'){
+        return{
+        ...newState,
+        task: action.editedTask
+       };
+
+      }
+      else{
+        const tasks = [...state.tasks];
+        const foundIndex = tasks.findIndex(task => task._id === action.editedTask._id );
+        tasks[foundIndex] = action.editedTask;
+
+
+       return{
+          ...newState,
+          tasks: tasks
+       };
+      }
+    }
      default: return state;
    }
   };

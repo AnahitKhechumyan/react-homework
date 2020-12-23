@@ -10,3 +10,11 @@
     color:rgb(255, 0, 128);
     font-weight: bolder;
 }
+#ltegte{
+    display:inline-block;
+    width:25%;
+}
+#ltegte > span{
+    display:inline-block;
+    width: 100%;
+}

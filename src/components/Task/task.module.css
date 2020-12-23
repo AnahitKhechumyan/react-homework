@@ -4,6 +4,16 @@
 .task{
     margin:0 auto 20px;
 }
+
+.active{
+    border:2px solid #0965c7;
+}
+
+.done{
+    border:2px solid #9da1a9;
+}
+
 .checked{
     border:1px solid red;
 }
+ 

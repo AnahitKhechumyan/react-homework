@@ -1,10 +1,10 @@
 import React, {PureComponent} from 'react';
 import {Card, Button, Tooltip, OverlayTrigger} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTrash, faEdit} from '@fortawesome/free-solid-svg-icons';
+import {faTrash, faEdit, faCheck, faHistory} from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css';
 import {Link} from 'react-router-dom';
-import {removeTask} from '../../store/actions';
+import {removeTask, changeTaskStatus} from '../../store/actions';
 import {connect} from 'react-redux';
 import {formatDate, shortStr} from '../../helpers/utils';
 import PropTypes from  'prop-types';
@@ -36,8 +36,15 @@ class Task extends PureComponent{
      const cardClasses = ['card', styles.task];
      if(checked){
        cardClasses.push(styles.checked);
-     }
-     
+     } 
+     if(data.status === 'active'){
+      cardClasses.push(styles.active);
+    }
+
+    else{
+      cardClasses.push(styles.done);
+    }
+ 
      return(
        <Card className = {cardClasses.join(' ')}>
          <input
@@ -58,6 +65,51 @@ class Task extends PureComponent{
              <Card.Text>
                  Created: {formatDate(data.created_at)}
              </Card.Text>
+               
+             <Card.Text>
+                 Status: {data.status}
+             </Card.Text>
+
+             {
+               data.status === "active" ?
+               <OverlayTrigger
+               placement = "top"
+               overlay = {
+                 <Tooltip >
+                   <strong>Mark as done</strong>
+                 </Tooltip>
+               }
+               > 
+                 <Button 
+                  title = 'Mark as read'
+                  className = 'm-1'
+                  variant = "success" 
+                  onClick = {()=> this.props.changeTaskStatus(data._id,{status: 'done'})}
+                  disabled = {disabled}
+                  >
+                  <FontAwesomeIcon icon = {faCheck} />
+                </Button>  
+               </OverlayTrigger>
+                 :
+                 <OverlayTrigger
+                 placement = "top"
+                 overlay = {
+                   <Tooltip >
+                     <strong>Mark as active</strong>
+                   </Tooltip>
+                 }
+                 > 
+                   <Button 
+                    title = 'Mark as active'
+                    className = 'm-1'
+                    variant = "warning" 
+                    onClick = {()=> this.props.changeTaskStatus(data._id,{status: 'active'})}
+                    disabled = {disabled}
+                    >
+                    <FontAwesomeIcon icon = {faHistory} />
+                  </Button>  
+                 </OverlayTrigger>
+             }
                
              <OverlayTrigger
                placement = "top"
@@ -112,7 +164,8 @@ class Task extends PureComponent{
   };
 
   const mapDispatchToProps = {
-    removeTask
+    removeTask,
+    changeTaskStatus
   };
 
     export default connect(null, mapDispatchToProps)(Task);
