@@ -18,3 +18,9 @@
     display:inline-block;
     width: 100%;
 }
+ 
+@media (min-width: 1200px){
+    #task-inner-padding{
+        padding: 4px;
+    }
+}

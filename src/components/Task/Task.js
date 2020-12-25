@@ -52,7 +52,7 @@ class Task extends PureComponent{
          className = {styles.checkbox}
          onClick = {this.toggleCheckbox}
          />
-         <Card.Body>
+         <Card.Body id = 'task-inner-padding'>
               <Link to ={`/task/${data._id}`}>
               <Card.Title>{data.title} </Card.Title>
               </Link>
@@ -72,25 +72,25 @@ class Task extends PureComponent{
 
              {
                data.status === "active" ?
-               <OverlayTrigger
-               placement = "top"
-               overlay = {
-                 <Tooltip >
-                   <strong>Mark as done</strong>
-                 </Tooltip>
-               }
-               > 
-                 <Button 
-                  title = 'Mark as read'
-                  className = 'm-1'
-                  variant = "success" 
-                  onClick = {()=> this.props.changeTaskStatus(data._id,{status: 'done'})}
-                  disabled = {disabled}
-                  >
-                  <FontAwesomeIcon icon = {faCheck} />
-                </Button>  
-               </OverlayTrigger>
-                 :
+                 <OverlayTrigger
+                 placement = "top"
+                 overlay = {
+                   <Tooltip >
+                     <strong>Mark as done</strong>
+                   </Tooltip>
+                 }
+                 > 
+                   <Button 
+                    title = 'Mark as read'
+                    className = 'm-1'
+                    variant = "success" 
+                    onClick = {()=> this.props.changeTaskStatus(data._id,{status: 'done'})}
+                    disabled = {disabled}
+                    >
+                    <FontAwesomeIcon icon = {faCheck} />
+                  </Button>  
+                 </OverlayTrigger>
+                  :
                  <OverlayTrigger
                  placement = "top"
                  overlay = {
@@ -109,6 +109,7 @@ class Task extends PureComponent{
                     <FontAwesomeIcon icon = {faHistory} />
                   </Button>  
                  </OverlayTrigger>
+                 
              }
                
              <OverlayTrigger
