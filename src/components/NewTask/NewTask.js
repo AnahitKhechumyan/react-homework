@@ -80,11 +80,13 @@ class NewTask extends PureComponent {
             });
             return; 
          }
+
+         date = date || new Date();
         
         const data = {
             title,
             description,
-            date: date.toISOString().slice(0, 10)
+            date:date.toISOString().slice(0, 10)
          };
 
          this.props.addTask(data);
