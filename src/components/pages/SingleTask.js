@@ -1,11 +1,13 @@
 import React, {PureComponent} from 'react';
-import {Button, Tooltip, OverlayTrigger} from 'react-bootstrap';
+import { Button, Tooltip, OverlayTrigger} from 'react-bootstrap';
+//import styles from '../Task/task.module.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTrash, faEdit, faHistory} from '@fortawesome/free-solid-svg-icons';
+import {faTrash, faEdit} from '@fortawesome/free-solid-svg-icons';
 import EditTaskModal from '../EditTaskModal';
 import {getTask, removeTask} from '../../store/actions';
 import {connect} from 'react-redux';
 import {formatDate} from '../../helpers/utils';
+
 
 class SingleTask extends PureComponent{
     state = {
@@ -43,11 +45,11 @@ class SingleTask extends PureComponent{
      render(){
       
         const {isEdit} = this.state;
-        const {task, disabled} = this.props;
+        const {task} = this.props;
 
         return(
          <>
-         {
+          {
             task ?
            <div>
                <p>Title:{task.title}</p>
@@ -55,26 +57,6 @@ class SingleTask extends PureComponent{
                <p>Date:{formatDate(task.date)}</p>
                <p>Created:{formatDate(task.created_at)}</p>
                 
-            
-                 <OverlayTrigger
-                 placement = "top"
-                 overlay = {
-                   <Tooltip >
-                     <strong>Mark as active</strong>
-                   </Tooltip>
-                 }
-                 > 
-                   <Button 
-                    title = 'Mark as active'
-                    className = 'm-1'
-                    variant = "warning" 
-                    onClick = {()=> this.props.changeTaskStatus({status: 'active'})}
-                    disabled = {disabled}
-                    >
-                    <FontAwesomeIcon icon = {faHistory} />
-                  </Button>  
-                 </OverlayTrigger>
-               
                <OverlayTrigger
                placement = "top"
                overlay = {
@@ -122,7 +104,8 @@ class SingleTask extends PureComponent{
                
             </div>:
             <div>There is no task!</div>
-            }   
+              }
+                  
          </>
         );
       }
