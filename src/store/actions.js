@@ -33,7 +33,7 @@ export function getTasks(params={}){
     return (dispatch)=>{
         dispatch({type:actionTypes.LOADING});
 
-        request(url)
+        request(`${apiUrl}/task`)
         .then(tasks => {
            dispatch({type:actionTypes.GET_TASKS_SUCCESS, tasks});
 
