@@ -8,9 +8,8 @@ function Register(){
     const [values, setValues] = useState({
         email: '' ,
         password: '' ,
-        confirmPassword:''
-    });
-
+        confirmPassword: ''
+    });                                                                                                                                                                                                                                                                    
     const [errors, setErrors] = useState({
         email: null,
         password: null,
