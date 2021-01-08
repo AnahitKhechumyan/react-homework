@@ -21,14 +21,16 @@ export function getTask(taskId){
 
 export function getTasks(params={}){
     let url = `${apiUrl}/task`;
-
-    let query ="?";
-    for(let key in params){
-        query += `${key} = ${params[key]}&`;  
-    }
-    if(query !== "? "){
-        url += query; 
-    }  
+     if(params.search){
+         url = url+'?search='+params.search;
+     }
+    //let query ="?";
+    //for(let key in params){
+       // query += `${key} = ${params[key]}&`;  
+    //}
+    //if(query !== "?"){
+       // url+= query; 
+    //}  
 
     return (dispatch)=>{
         dispatch({type:actionTypes.LOADING});

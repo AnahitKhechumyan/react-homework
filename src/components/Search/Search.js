@@ -99,7 +99,7 @@ const [dates, setDates] = useState({
  };
 
  const handleSubmit = ()=>{
-     const searchData = {
+     const searchData ={
         search,
         status: status.value,
         sort: sort.value
@@ -112,7 +112,7 @@ const [dates, setDates] = useState({
          }
      }
     props.getTasks(searchData);
- };
+};
 
     return(
     <div className = "w-100">
@@ -167,16 +167,16 @@ const [dates, setDates] = useState({
              variant="outline-primary"
              onClick={handleSubmit}
              >
-                      Search
+                 Search
              </Button>
         </InputGroup.Append>
      </InputGroup>
      
 
        {
-          dateOptions.map(option =>
+          dateOptions.map((option, index) =>
             <div id={'ltegte'}
-            key = {option.value}
+            key = {index}
             >
                 <span>{option.label}</span>
                 <DatePicker
