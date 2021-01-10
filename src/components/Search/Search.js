@@ -108,11 +108,12 @@ const [dates, setDates] = useState({
      for(let key in dates){
          let val = dates[key];
          if(val){
-           searchData[key] = val.toLocaleDateString();
+           searchData[key] = val.toLocaleDateString();  
          }
      }
     props.getTasks(searchData);
-};
+    };
+     
 
     return(
     <div className = "w-100">
@@ -127,10 +128,10 @@ const [dates, setDates] = useState({
         <DropdownButton
              as={InputGroup.Append}
              variant="outline-secondary"
-             title={status.value ? status.label : "Status"}   
+             title={status.value ? status.label : "Status"}    
          >
             {
-                 statusOptions.map((option,index) =>
+                 statusOptions.map((option,index) => 
                     <Dropdown.Item
                        key={index}
                        active = {status.value === option.value}
