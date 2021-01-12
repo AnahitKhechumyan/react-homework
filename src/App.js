@@ -10,6 +10,7 @@ import Spinner from './components/Spinner/Spinner';
 import Info from './components/pages/Info';
 import Contact from './components/pages/Contact';
 import NavMenu from './components/NavMenu';
+import Register from './components/pages/Register/Register';
 import {ToastContainer, toast} from 'react-toastify';
 import {connect} from 'react-redux';
 
@@ -39,6 +40,7 @@ componentDidUpdate(){
        <Route path = '/About' exact component  = {Info}/>
        <Route path = '/Contact' exact component  = {Contact}/>
        <Route path = '/not-found' exact component  = {NotFound}/>
+       <Route path = '/register' exact component  = {Register}/>
        <Redirect to='/not-found'/>
 
     </Switch>
@@ -63,7 +65,7 @@ componentDidUpdate(){
 }
 
 const mapStateToProps = (state)=>{
-return{
+ return{
     errorMessage: state.error,
     successMessage: state.successMessage,
     showSpinner: state.loading

@@ -37,6 +37,7 @@ class Task extends PureComponent{
      if(checked){
        cardClasses.push(styles.checked);
      } 
+       
      if(data.status === 'active'){
       cardClasses.push(styles.active);
     }

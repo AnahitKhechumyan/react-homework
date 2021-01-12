@@ -21,13 +21,12 @@ export function getTask(taskId){
 
 export function getTasks(params={}){
     let url = `${apiUrl}/task`;
-
     let query ="?";
     for(let key in params){
-        query += `${key} = ${params[key]}&`;  
+        query+= `${key}=${params[key]}&`;  
     }
-    if(query !== "? "){
-        url += query; 
+    if(query !== "?"){
+        url+= query; 
     }  
 
     return (dispatch)=>{
@@ -126,3 +125,4 @@ export function changeTaskStatus(taskId, data, from = 'tasks'){
         });
     }
 }
+

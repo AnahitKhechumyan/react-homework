@@ -99,7 +99,7 @@ const [dates, setDates] = useState({
  };
 
  const handleSubmit = ()=>{
-     const searchData = {
+     const searchData ={
         search,
         status: status.value,
         sort: sort.value
@@ -108,11 +108,12 @@ const [dates, setDates] = useState({
      for(let key in dates){
          let val = dates[key];
          if(val){
-           searchData[key] = val.toLocaleDateString();
+           searchData[key] = val.toLocaleDateString();  
          }
      }
     props.getTasks(searchData);
- };
+    };
+     
 
     return(
     <div className = "w-100">
@@ -127,10 +128,10 @@ const [dates, setDates] = useState({
         <DropdownButton
              as={InputGroup.Append}
              variant="outline-secondary"
-             title={status.value ? status.label : "Status"}   
+             title={status.value ? status.label : "Status"}    
          >
             {
-                 statusOptions.map((option,index) =>
+                 statusOptions.map((option,index) => 
                     <Dropdown.Item
                        key={index}
                        active = {status.value === option.value}
@@ -167,16 +168,16 @@ const [dates, setDates] = useState({
              variant="outline-primary"
              onClick={handleSubmit}
              >
-                      Search
+                 Search
              </Button>
         </InputGroup.Append>
      </InputGroup>
      
 
        {
-          dateOptions.map(option =>
+          dateOptions.map((option, index) =>
             <div id={'ltegte'}
-            key = {option.value}
+            key = {index}
             >
                 <span>{option.label}</span>
                 <DatePicker

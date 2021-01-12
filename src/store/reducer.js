@@ -18,14 +18,14 @@ const defaultState = {
       ...state,
       loading: true,
       successMessage: null,
-      error: null,
+      error: null
       
    };
 
     
-    switch(action.type){
+    switch(action.type){ 
        case actionTypes.LOADING : return loadingState;
-
+    
        case actionTypes.ERROR:{
         return{
            ...state,
@@ -55,7 +55,7 @@ const defaultState = {
       case actionTypes.ADDING_TASK:{
         return{
            ...loadingState, 
-           addTaskSuccess: false,
+           addTaskSuccess: false
         };
       }
 
@@ -73,7 +73,7 @@ const defaultState = {
       case actionTypes.REMOVING_TASK:{
          return {
            ...loadingState,
-           removeTaskSuccess: false,
+           removeTaskSuccess: false
          };
      }
 
@@ -126,7 +126,7 @@ const defaultState = {
       case actionTypes.EDITING_TASK:{
         return{
            ...loadingState,
-           editTaskSuccess: false,
+           editTaskSuccess: false
             
         };
       }
@@ -200,8 +200,7 @@ const defaultState = {
        };
       }
     }
-     default: return state;
-   }
-  };
-  
+    default: return state;
+  }
+};  
    

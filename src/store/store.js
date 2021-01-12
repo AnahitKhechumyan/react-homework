@@ -9,7 +9,7 @@ if(process.env.NODE_ENV ==="development"){
      middlewaresArr.push(logger); 
 }
 
-const middlewares = applyMiddleware(... middlewaresArr);
+const middlewares = applyMiddleware(...middlewaresArr);
 
 export  const store = createStore(mainReducer,composeWithDevTools(middlewares));
   
