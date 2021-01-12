@@ -65,7 +65,7 @@ componentDidUpdate(){
 }
 
 const mapStateToProps = (state)=>{
-return{
+ return{
     errorMessage: state.error,
     successMessage: state.successMessage,
     showSpinner: state.loading

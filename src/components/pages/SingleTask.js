@@ -38,13 +38,13 @@ class SingleTask extends PureComponent{
            isEdit: !this.state.isEdit
          });
       }
-      handleSave = (taskId,data)=>{
-           this.props.editTask(taskId,data);
-      }
+      //handleSave = (taskId,data)=>{
+          // this.props.editTask(taskId,data);
+     // }
      render(){
-      
-        const {isEdit} = this.state;
-        const {task, data, disabled } = this.props;
+
+      const {task, disabled} = this.props;
+      const {isEdit} = this.state;
 
         return(
          <>
@@ -55,7 +55,51 @@ class SingleTask extends PureComponent{
                <p>Description:{task.description}</p>
                <p>Date:{formatDate(task.date)}</p>
                <p>Created:{formatDate(task.created_at)}</p>
+               <p>Status:{task.status}</p>
+              
+               {
+                task.status === "active" ?
+                <OverlayTrigger
+                 placement = "top"
+                 overlay = {
+                   <Tooltip >
+                     <strong>Mark as done</strong>
+                   </Tooltip>
+                 }
+                 > 
+                  <Button 
+                    title = 'Mark as done'
+                    className = 'm-1'
+                    variant = "success" 
+                    onClick = {()=> this.props.changeTaskStatus(task._id, {status: 'done'},'single')}
+                    disabled = {disabled}
+                    >
+                    <FontAwesomeIcon icon = {faCheck} />
+                  </Button>  
+                 </OverlayTrigger>
+                 :
+                 <OverlayTrigger
+                 placement = "top"
+                 overlay = {
+                   <Tooltip >
+                     <strong>Mark as active</strong>
+                   </Tooltip>
+                 }
+                 > 
+                   <Button 
+                    title = 'Mark as active'
+                    className = 'm-1'
+                    variant = "warning" 
+                    onClick = {()=> this.props.changeTaskStatus(task._id, {status: 'active'}, 'single')}
+                    disabled = {disabled}
+                    >
+                    <FontAwesomeIcon icon = {faHistory}/>
+                  </Button>  
+                 </OverlayTrigger>
+                 }
+
                 
+
                <OverlayTrigger
                placement = "top"
                overlay = {
@@ -97,49 +141,10 @@ class SingleTask extends PureComponent{
                 <EditTaskModal
                 data = {task}
                 onCancel = {this.toggleEditModal}
-                form = 'single'
+                from = 'single'
                 />
                }
-                       
-               
-               <OverlayTrigger
-                 placement = "top"
-                 overlay = {
-                   <Tooltip >
-                     <strong>Mark as done</strong>
-                   </Tooltip>
-                 }
-                 > 
-                   <Button 
-                    title = 'Mark as read'
-                    className = 'm-1'
-                    variant = "success" 
-                    onClick = {()=> this.props.changeTaskStatus(data._id,{status: 'done'})}
-                    disabled = {disabled}
-                    >
-                    <FontAwesomeIcon icon = {faCheck} />
-                  </Button>  
-                 </OverlayTrigger>
-               
-                 <OverlayTrigger
-                 placement = "top"
-                 overlay = {
-                   <Tooltip >
-                     <strong>Mark as active</strong>
-                   </Tooltip>
-                 }
-                 > 
-                   <Button 
-                    title = 'Mark as active'
-                    className = 'm-1'
-                    variant = "warning" 
-                    onClick = {()=> this.props.changeTaskStatus(data._id,{status: 'active'})}
-                    disabled = {disabled}
-                    >
-                    <FontAwesomeIcon icon = {faHistory}/>
-                  </Button>  
-                 </OverlayTrigger>
-               
+
             </div>:
             <div>There is no task!</div>
          }
@@ -153,7 +158,8 @@ const mapStateToProps = (state) => {
    return{
       task:state.task,
       removeTaskSuccess: state.removeTaskSuccess,
-      editTaskSuccess: state.editTaskSuccess
+      editTaskSuccess: state.editTaskSuccess,
+      changeTaskStatusSuccess: state.changeTaskStatusSuccess
    };
 }
 
