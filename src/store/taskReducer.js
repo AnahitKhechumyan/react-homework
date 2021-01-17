@@ -12,7 +12,7 @@ const defaultState = {
     successMessage: null
   };
 
-  export const mainReducer = (state = defaultState, action)=>{
+  export const taskReducer = (state = defaultState, action)=>{
 
     const loadingState = {
       ...state,
@@ -106,6 +106,9 @@ const defaultState = {
           removeTasksSuccess: false,
         };
       }
+
+
+
       case actionTypes.REMOVE_TASKS_SUCCESS:{
 
         let newTasks = [...state.tasks];
