@@ -14,6 +14,7 @@ import Register from './components/pages/Register/Register';
 import Login from './components/pages/Login/Login';
 import {ToastContainer, toast} from 'react-toastify';
 import {connect} from 'react-redux';
+import CustomRoute from './components/Router/CustomRoute';
 
 class  App extends PureComponent{
 
@@ -43,13 +44,13 @@ componentDidUpdate(){
     < NavMenu/>
     <Switch>
       
-       <Route path = '/' exact component  = {ToDo}/>
-       <Route path = '/task/:id' exact component  = { SingleTask}/>
+       <CustomRoute type = 'private' path = '/' exact component  = {ToDo}/>
+       <CustomRoute type = 'private' path = '/task/:id' exact component  = { SingleTask}/>
        <Route path = '/About' exact component  = {Info}/>
        <Route path = '/Contact' exact component  = {Contact}/>
        <Route path = '/not-found' exact component  = {NotFound}/>
-       <Route path = '/register' exact component  = {Register}/>
-       <Route path = '/login' exact component  = {Login}/>
+       <CustomRoute type = 'public' path = '/register' exact component  = {Register}/>
+       <CustomRoute type = 'public' path = '/login' exact component  = {Login}/>
        <Redirect to='/not-found'/>
 
     </Switch>
