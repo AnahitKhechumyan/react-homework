@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Form, Button, Container, Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux';  
 import {register} from '../../../store/userActions';
@@ -61,14 +61,7 @@ function Register(props){
             [name]:null 
          });
     };
-      const {registerSuccess, history} = props;
-      useEffect(()=>{
-          if(registerSuccess){
-              history.push('/login');
-          }
-
-      }, [registerSuccess, history])
-
+      
     return(
     <div className={styles.main}>
         <Container> 
@@ -169,17 +162,13 @@ function Register(props){
     </div>
     );
  }
-     const mapStateToProps = (state)=>{
-         return{
-             registerSuccess: state.authReducer.registerSuccess
-         }
-     }
+     
      const mapDispatchToProps = {
          register
      }     
     
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(null, mapDispatchToProps)(Register);
 
 //function Register(){
     //const [values, setValues] = useState({
