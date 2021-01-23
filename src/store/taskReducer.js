@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import {LOGOUT_SUCCESS} from './userActionTypes'
+import {LOGOUT_SUCCESS, AUTH_LOADING} from './userActionTypes'
 
 const defaultState = {
     tasks: [],
@@ -26,6 +26,15 @@ const defaultState = {
     
     switch(action.type){ 
        case LOGOUT_SUCCESS: return defaultState;
+
+       case AUTH_LOADING:{
+         return {
+           ...state,
+          successMessage: null,
+          error: null
+          
+         };
+       }
 
        case actionTypes.LOADING : return loadingState;
     

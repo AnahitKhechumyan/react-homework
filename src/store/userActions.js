@@ -40,10 +40,10 @@ export function login(data){
 
 export function logout(){
 
-    return (dispatch)=>{
+    return async (dispatch)=>{
         dispatch({type:actionTypes.AUTH_LOADING});
 
-        request(`${apiUrl}/user/sign-out`, "POST",{jwt: getJWT()})
+        request(`${apiUrl}/user/sign-out`, "POST",{jwt: await getJWT()})
         .then(() => {
             removeJWT();
            dispatch({type:actionTypes.LOGOUT_SUCCESS});
