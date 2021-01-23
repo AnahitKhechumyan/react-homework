@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 function CustomRoute ({isAuthenticated, type='public', path, exact, component: Component}){
    if(type === 'private'){
     return (
-        <Route  path={path} exact= {exact} render={(props)=>{ 
+        <Route  path= {path} exact= {exact} render={(props)=>{ 
         return isAuthenticated ?
                <Component {...props} /> :
               <Redirect to='/login'/>
@@ -15,7 +15,7 @@ function CustomRoute ({isAuthenticated, type='public', path, exact, component: C
    }
    else{
     return (
-        <Route  path={path} exact= {exact} render={(props)=>{ 
+        <Route  path= {path} exact= {exact} render={(props)=>{ 
         return !isAuthenticated ?
                <Component {...props} /> :
               <Redirect to='/'/>
@@ -32,9 +32,9 @@ const mapStateToProps = (state)=>{
 
   CustomRoute.propTypes = {
       type: PropTypes.oneOf(['private','public']),
-      path: PropTypes.string.isrequired,
+      path: PropTypes.string,
       exact: PropTypes.bool,
-      component: PropTypes.object.isrequired
+      component: PropTypes.object 
   }
 
 export default connect(mapStateToProps)(CustomRoute);

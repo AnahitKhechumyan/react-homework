@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Navbar, Nav, Button} from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
 import {logout} from './../store/userActions'; 
 import {connect} from 'react-redux';
+import {getUserInfo} from './../store/userActions';
 
-  function NavMenu({isAuthenticated, logout}){
+  function NavMenu({isAuthenticated, logout, getUserInfo, user}){
+    useEffect(()=>{
+        if(isAuthenticated){
+            getUserInfo();  
+        }
+    }, [getUserInfo,isAuthenticated]);
 
     return (
-    <Navbar bg="light" variant="dark">
-        {
+           <>
+           {user && <div className = "text-left"><h5>{user.name} {user.surname}</h5></div>}
+           <Navbar bg="light" variant="dark">
+          {
              isAuthenticated ? 
              <Navbar.Brand > 
              <NavLink
@@ -71,15 +79,18 @@ import {connect} from 'react-redux';
              >Logout</Button>
              }
      </Navbar>
+     </>
     );
 }
 const mapStateToProps = (state)=>{
     return{
-        isAuthenticated: state.authReducer.isAuthenticated
+        isAuthenticated: state.authReducer.isAuthenticated,
+        user: state.authReducer.userInfo
     };
 }
 
 const mapDispatchToProps = {
-    logout
+    logout,
+    getUserInfo
 };
 export default connect(mapStateToProps,mapDispatchToProps)(NavMenu);
