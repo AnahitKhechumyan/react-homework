@@ -16,3 +16,92 @@
 .checked{
     border:1px solid red;
 }
+ 
+
+.taskStyle{
+    border: 4px solid #ab1bad;
+    border-radius: 15px;
+    text-align:center;
+    color:#39043a;
+    background-color: #f8d5f8;
+    box-shadow:#c46cc4 10px 10px;
+}
+.singleTaskParent{
+    height:calc(100vh - 147px);
+   background-color: #f8d5f8;
+   padding:20px;
+}
+.singleTask{
+    height: 90%;
+    width: 30%;
+    margin:0 auto;
+    padding:20px;
+    border: 4px solid #ab1bad;
+    border-radius: 15px;
+    color:#39043a;
+    background-color: #faf3fa;
+    box-shadow:#c46cc4 20px 20px;
+    position:relative;
+}
+.singleTask span{
+    font-weight: bold;
+    color:#ab1bad;
+    margin-right: 5px;
+}
+.singleTask button{
+    margin: 5px;
+}
+.actionButtonContainer{
+    position:absolute;
+    bottom:0px;
+    left:33%;
+}
+ 
+.singleTask .btnDanger{
+    color: #fff;
+    background-color: #590770;
+    border-color: #ffffff;
+}
+.singleTask .btnDanger:hover{
+    color: #ff0000;
+    background-color: #ffffff;
+    border-color: #590770;
+}
+
+.singleTask .btnInfo{
+    color: #fff;
+    background-color: #8c0aad;
+    border-color: #ffffff;  
+}
+.singleTask .btnInfo:hover{
+    color: #2971f6;
+    background-color: #ffffff;
+    border-color: #8c0aad;
+}
+.singleTask .btnSuccess{
+    color: #fff;
+    background-color: #a248a3;
+    border-color: #ffffff;
+}
+.singleTask .btnSuccess:hover{
+    color: #28a745;
+    background-color: #ffffff;
+    border-color: #a248a3;
+} 
+.singleTask .btnWarning{
+    color: #fff;
+    background-color: #a248a3;
+    border-color: #ffffff;
+}
+.singleTask .btnWarning:hover{
+    color: #d6a308;
+    background-color: #ffffff;
+    border-color: #a248a3;
+} 
+
+
+.footerBackground{
+    margin-top:10px;
+}
+ 
+    

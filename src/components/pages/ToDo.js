@@ -8,6 +8,7 @@ import Search from '../Search/Search';
 import {connect} from 'react-redux';
 import {getTasks, removeTasks} from '../../store/actions';
 
+
 class ToDo extends PureComponent  {
    state = {
       checkedTasks:new Set(),
@@ -98,7 +99,7 @@ class ToDo extends PureComponent  {
        
          return( 
          
-            <Container fluid ={true}>
+            <Container fluid ={true} className="homeStyle">
                <Row >
                   <Search/>
                   <Col md={{span:6, offset:3}} className = "text-center">

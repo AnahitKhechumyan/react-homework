@@ -1,0 +1,22 @@
+.navigationPanel{
+    background-color:#8c0aad;
+}
+.navigationPanel a {
+    color:white;
+    margin-right:50px;
+}
+.activeLink{
+    font-weight: bold;
+}
+.navigationPanel .navbar-nav{
+    margin-right: 0px !important;
+}
+.navigationPanel .button{
+    background-color:#cb48f0; 
+    border-color:#cb48f0;
+}
+.navigationPanel .button:hover{
+    background-color:#fff; 
+    border-color:indigo;
+    color:indigo;
+}

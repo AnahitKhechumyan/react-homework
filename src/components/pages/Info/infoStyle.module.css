@@ -1,0 +1,13 @@
+.main{
+    background-image: url('../../../images/3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:calc(100vh - 130px);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.aboutText{
+    padding-top: 5vh;
+    color: #654b7a;
+}

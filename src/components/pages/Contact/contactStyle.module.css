@@ -1,0 +1,30 @@
+.main{
+    background-image: url('../../../images/4.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:calc(100vh - 93px);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.heading{
+    margin-bottom: 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.submitContainer{
+    text-align: center;    
+}
+.submitContainer >button{
+    width: 20%;
+}
+.invalid{
+    border:2px solid rgb(105, 3, 3);
+}
+.contactButton{
+
+    background-color: #b5379b;
+    border-color: #b5379b;
+}

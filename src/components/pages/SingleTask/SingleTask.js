@@ -1,13 +1,12 @@
 import React, {PureComponent} from 'react';
 import { Button, Tooltip, OverlayTrigger} from 'react-bootstrap';
-//import styles from '../Task/task.module.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTrash, faEdit, faCheck, faHistory} from '@fortawesome/free-solid-svg-icons';
-import EditTaskModal from '../EditTaskModal';
-import {getTask, removeTask, changeTaskStatus} from '../../store/actions';
+import EditTaskModal from '../../EditTaskModal';
+import {getTask, removeTask, changeTaskStatus} from '../../../store/actions';
 import {connect} from 'react-redux';
-import {formatDate} from '../../helpers/utils';
-
+import {formatDate} from '../../../helpers/utils';
+import styles from '../../Task/task.module.css';
 
 class SingleTask extends PureComponent{
     state = {
@@ -49,14 +48,16 @@ class SingleTask extends PureComponent{
         return(
          <>
           {
-            task ?
-           <div>
-               <p>Title:{task.title}</p>
-               <p>Description:{task.description}</p>
-               <p>Date:{formatDate(task.date)}</p>
-               <p>Created:{formatDate(task.created_at)}</p>
-               <p>Status:{task.status}</p>
-              
+         task ?
+           <div className= {styles.singleTaskParent}> 
+           <div className={styles.singleTask}>
+               <p><span>Title:</span>{task.title}</p>
+               <p><span>Description:</span>{task.description}</p>
+               <p><span>Date:</span>{formatDate(task.date)}</p>
+               <p><span>Created:</span>{formatDate(task.created_at)}</p>
+               <p><span>Status:</span>{task.status}</p>
+
+              <div className= {styles.actionButtonContainer}> 
                {
                 task.status === "active" ?
                 <OverlayTrigger
@@ -69,7 +70,7 @@ class SingleTask extends PureComponent{
                  > 
                   <Button 
                     title = 'Mark as done'
-                    className = 'm-1'
+                    className = {styles.btnSuccess}
                     variant = "success" 
                     onClick = {()=> this.props.changeTaskStatus(task._id, {status: 'done'},'single')}
                     disabled = {disabled}
@@ -88,7 +89,7 @@ class SingleTask extends PureComponent{
                  > 
                    <Button 
                     title = 'Mark as active'
-                    className = 'm-1'
+                    className = {styles.btnWarning}
                     variant = "warning" 
                     onClick = {()=> this.props.changeTaskStatus(task._id, {status: 'active'}, 'single')}
                     disabled = {disabled}
@@ -110,7 +111,7 @@ class SingleTask extends PureComponent{
                > 
                  <Button 
                   title = 'Edit'
-                  className = 'm-1'
+                  className = {styles.btnInfo}
                   variant = "info" 
                   onClick = {this.toggleEditModal}
                   >
@@ -128,7 +129,7 @@ class SingleTask extends PureComponent{
                >
                 <Button 
                   title = 'Remove'
-                  className = 'm-1'
+                  className = {styles.btnDanger}
                   variant = "danger" 
                   onClick = {this.handleRemove}
                   >
@@ -144,8 +145,10 @@ class SingleTask extends PureComponent{
                 from = 'single'
                 />
                }
-
-            </div>:
+             </div>
+            </div>
+            </div>
+            :
             <div>There is no task!</div>
          }
                   

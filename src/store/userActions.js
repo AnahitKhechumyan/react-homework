@@ -71,12 +71,27 @@ export function getUserInfo(){
            
         })
         .catch((err) =>{
-            dispatch({type:actionTypes.AUTH_ERROR, error: err.message});    
+            dispatch({type:actionTypes.AUTH_ERROR, error:err.message});    
         });
     }
 } 
  
-  
+export function sendMessage(data){
+
+    return (dispatch)=>{
+        dispatch({type:actionTypes.AUTH_LOADING});
+
+        request(`${apiUrl}/form`,'POST',data, true)
+         
+        .then(response => {
+           dispatch({type:actionTypes.SEND_MESSAGE_SUCCESS});
+           
+        })
+        .catch((err) =>{
+            dispatch({type:actionTypes.AUTH_ERROR, error:err.message});    
+        });
+    }
+}  
 
  
   

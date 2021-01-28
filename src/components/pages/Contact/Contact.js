@@ -1,0 +1,130 @@
+import React,{useState} from 'react'; 
+import {Form, Button, Container, Row, Col} from 'react-bootstrap';
+import {connect} from 'react-redux';  
+import {sendMessage} from '../../../store/userActions';
+// import {Link} from 'react-router-dom';
+import styles from './contactStyle.module.css';
+
+ 
+
+function Contact(props){
+    const [values, setValues] = useState({
+        email: '' ,
+        message: '',
+        name:''
+         
+    });                                                                                                                                                                                                                                                                    
+    const [errors, setErrors] = useState({
+        email: null,
+        message: null,
+        name: null
+         
+    });
+    
+         
+    const handleSubmit = (event)=>{
+        //event.preventDefault();
+        const {name, email, message} = values;
+        let valid = true;
+
+        setErrors({
+            name:name ? null : 'Name is required',
+            email: email ? null : 'Email is required', 
+            message: message ? null : 'Message is required'
+
+         });
+         if(valid){
+              props.sendMessage(values);     
+         }
+ 
+    }; 
+     
+                       
+    const handleChange = ({target: {name, value}})=>{
+        setValues({
+            ...values,
+            [name]: value
+        });
+        setErrors({
+            ...errors,
+            [name]:null 
+         });
+    };
+
+        return(
+           <div className={styles.main}>
+           <Container> 
+           <Row className="justify-content-center"> 
+           <Col xs={12} sm={8} md={6}> 
+           <Form>
+                <h5 className={styles.heading}>Contact</h5>
+               <Form.Group controlId="formBasicName">
+                <Form.Control
+                className={errors.name? styles.invalid:''}  
+                type="text"
+                name="name"
+                placeholder="Enter your name."
+                value={values.name}
+                onChange={handleChange}
+                 />
+                 {
+                     <Form.Text className="text-danger">
+                         {errors.name}
+                     </Form.Text>
+                 }
+
+               </Form.Group>
+               <Form.Group controlId="formBasicEmail">
+                 <Form.Control
+                  className={errors.email? styles.invalid:''}  
+                  type="email"   
+                  placeholder="Enter  email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                   />
+                   {
+                       <Form.Text className="text-danger">
+                           {errors.email}
+                       </Form.Text>
+                   }
+               </Form.Group>
+                <Form.Group controlId="formBasicMessage">
+                <Form.Control
+                 className={errors.message? styles.invalid:''}  
+                 type="text" 
+                 name="message"
+                 placeholder="Enter message"
+                 value={values.message}
+                 onChange={handleChange}
+                 />
+                  {
+                       <Form.Text className="text-danger">
+                           {errors.message}
+                       </Form.Text>
+                   }
+               </Form.Group>
+              <div className={styles.submitContainer}>   
+                <Button variant="primary"
+                 type="submit"
+                onClick={handleSubmit}
+                className={styles.contactButton}
+                >
+                    Send
+                </Button>
+                </div>
+           </Form>
+           </Col>
+           </Row>  
+           </Container> 
+           </div>
+        );
+    
+   }
+
+const mapDispatchToProps = {
+    sendMessage
+}     
+
+
+export default connect(null, mapDispatchToProps)(Contact);

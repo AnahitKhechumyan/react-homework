@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react';
 import {Navbar, Nav, Button} from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
-import {logout} from './../store/userActions'; 
+import {logout} from '../../store/userActions'; 
 import {connect} from 'react-redux';
-import {getUserInfo} from './../store/userActions';
+import {getUserInfo} from '../../store/userActions';
+import styles from  './navMenuStyle.module.css';
+
 
   function NavMenu({isAuthenticated, logout, getUserInfo, user}){
     useEffect(()=>{
@@ -14,30 +16,34 @@ import {getUserInfo} from './../store/userActions';
 
     return (
            <>
-           {user && <div className = "text-left"><h5>{user.name} {user.surname}</h5></div>}
-           <Navbar bg="light" variant="dark">
+           {
+               user && <div className = "text-right userName">
+               <h5>{user.name} {user.surname}</h5>
+               </div>
+           }
+           <Navbar className = {styles.navigationPanel} variant="light">
           {
              isAuthenticated ? 
-             <Navbar.Brand > 
+              
              <NavLink
               to='/'
-              activeClassName = 'activeLink'
+              activeClassName = {styles.activeLink}
               exact 
               >
-             HOME
+             Home
              </NavLink>
-             </Navbar.Brand > :
+              :
              <> 
-             <NavLink className="mr-auto"
+             <NavLink 
              to='/register'
-              activeClassName = 'activeLink'
+              activeClassName = {styles.activeLink}
               exact
               >
              Register
              </NavLink>
-             <NavLink className="mr-auto"
+             <NavLink 
              to='/login'
-              activeClassName = 'activeLink'
+              activeClassName = {styles.activeLink}
               exact
               > 
               Login
@@ -45,36 +51,26 @@ import {getUserInfo} from './../store/userActions';
              </> 
             }
 
-             {/*<Nav className="mr-auto">
-               <NavLink
-                to='/task' 
-                exact
-                activeClassName = 'activeLink'
-                >
-                TASK
-                </NavLink>
-                </Nav>*/}
 
-            <Nav className="mr-auto">
-                <NavLink 
+             <NavLink 
                 exact 
-                activeClassName = 'activeLink'
+                activeClassName = {styles.activeLink}
                 to='/about'>
                 About
-                </NavLink>
-            </Nav>
+            </NavLink>
+            
 
             <Nav className="mr-auto">
                 <NavLink 
                 exact 
-                activeClassName = 'activeLink'
+                activeClassName = {styles.activeLink}
                 to='/contact'>
                 Contact
                 </NavLink>
             </Nav>
             {isAuthenticated && 
             <Button
-             variant = "primary"
+             className = {styles.button}
              onClick= {logout}
              >Logout</Button>
              }

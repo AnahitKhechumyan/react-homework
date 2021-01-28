@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {InputGroup, FormControl, Button, DropdownButton, Dropdown} from 'react-bootstrap';
+import {Container, InputGroup, FormControl, Button, DropdownButton, Dropdown, Row} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {getTasks}  from '../../store/actions';
 import {shortStr} from '../../helpers/utils';
@@ -117,7 +117,7 @@ const [dates, setDates] = useState({
 
     return(
     <div className = "w-100">
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-3 searchInput">
         <FormControl
            placeholder="Search for a task..."
            aria-describedby="basic-addon2"
@@ -165,32 +165,37 @@ const [dates, setDates] = useState({
 
         <InputGroup.Append>
             <Button
-             variant="outline-primary"
+             variant="outline-secondary"
              onClick={handleSubmit}
              >
                  Search
              </Button>
         </InputGroup.Append>
      </InputGroup>
-     
-
-       {
-          dateOptions.map((option, index) =>
-            <div id={'ltegte'}
-            key = {index}
-            >
-                <span>{option.label}</span>
-                <DatePicker
-                 selected = {dates[option.value]}
-                 onChange = {(value) => setDates({
-                     ...dates,
-                     [option.value]:value
-                 })}  
-                />
-            </div>)
-       }
-
-     
+    <Container>
+    <Row>
+        {/* <Col> */}
+            {
+                dateOptions.map((option, index) =>
+                    
+                    <div id={'ltegte'}
+                    key = {index}
+                    >
+                        <span>{option.label}</span>
+                        <DatePicker
+                        selected = {dates[option.value]}
+                        onChange = {(value) => setDates({
+                            ...dates,
+                            [option.value]:value
+                        })}  
+                        />
+                    </div>
+                    
+                    )
+            }
+        {/* </Col> */}
+    </Row>
+    </Container>
      </div>
     )
 }
