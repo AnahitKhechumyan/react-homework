@@ -123,8 +123,13 @@ class ToDo extends PureComponent  {
                 </Row>
                 
 
-                <Row>
-                      {tasksComponents}
+                <Row className="taskContainer">
+                     
+                       {
+                           tasksComponents
+                           
+                       }
+                      
                 </Row>
                 
                     { showConfirm &&

@@ -25,7 +25,7 @@ function Contact(props){
     const handleSubmit = (event)=>{
         //event.preventDefault();
         const {name, email, message} = values;
-        let valid = true;
+         
 
         setErrors({
             name:name ? null : 'Name is required',
@@ -33,9 +33,10 @@ function Contact(props){
             message: message ? null : 'Message is required'
 
          });
-         if(valid){
+         if(name && email && message){
               props.sendMessage(values);     
          }
+         
  
     }; 
      
@@ -51,8 +52,11 @@ function Contact(props){
          });
     };
 
+    
+
+
         return(
-           <div className={styles.main}>
+           <div className={[styles.main,styles.contactContainer].join(" ")}>
            <Container> 
            <Row className="justify-content-center"> 
            <Col xs={12} sm={8} md={6}> 
@@ -68,7 +72,7 @@ function Contact(props){
                 onChange={handleChange}
                  />
                  {
-                     <Form.Text className="text-danger">
+                     <Form.Text className="text-danger-big">
                          {errors.name}
                      </Form.Text>
                  }
@@ -84,7 +88,7 @@ function Contact(props){
                   onChange={handleChange}
                    />
                    {
-                       <Form.Text className="text-danger">
+                       <Form.Text className="text-danger-big">
                            {errors.email}
                        </Form.Text>
                    }
@@ -99,15 +103,14 @@ function Contact(props){
                  onChange={handleChange}
                  />
                   {
-                       <Form.Text className="text-danger">
+                       <Form.Text className="text-danger-big">
                            {errors.message}
                        </Form.Text>
                    }
                </Form.Group>
               <div className={styles.submitContainer}>   
                 <Button variant="primary"
-                 type="submit"
-                onClick={handleSubmit}
+                            onClick={handleSubmit}
                 className={styles.contactButton}
                 >
                     Send

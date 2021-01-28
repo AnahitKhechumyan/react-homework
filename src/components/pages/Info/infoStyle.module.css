@@ -2,7 +2,7 @@
     background-image: url('../../../images/3.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    height:calc(100vh - 130px);
+    height:calc(100vh - 125px);
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -11,3 +11,10 @@
     padding-top: 5vh;
     color: #654b7a;
 }
+.aboutTodo{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    padding-top: 40px;
+}
+ 

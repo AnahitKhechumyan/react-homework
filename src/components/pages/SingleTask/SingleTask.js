@@ -52,7 +52,7 @@ class SingleTask extends PureComponent{
            <div className= {styles.singleTaskParent}> 
            <div className={styles.singleTask}>
                <p><span>Title:</span>{task.title}</p>
-               <p><span>Description:</span>{task.description}</p>
+               <p className={styles.descriptionContainer}><span>Description:</span>{task.description}</p>
                <p><span>Date:</span>{formatDate(task.date)}</p>
                <p><span>Created:</span>{formatDate(task.created_at)}</p>
                <p><span>Status:</span>{task.status}</p>

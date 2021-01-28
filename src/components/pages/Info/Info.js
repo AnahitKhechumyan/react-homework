@@ -12,11 +12,15 @@ function Info(){
                 <Row className="justify-content-center"> 
                     <Col xs={12} sm={8} md={6}>
                         <div className={styles.aboutText}>
-                            <h1>Չպլանավորելով ոչինչ՝ պլանավորում ենք մեր անհաջողությունը</h1>
+                            <h1>BY NOT PLANNING <br/>WHAT TO DO,<br/> WE ARE PLANNING<br/> OUR FAILURE...</h1>
+                        </div>
+                        <div>
+                            <p className= {styles.aboutTodo}>sadfghbjnmk,jhkjhkj kjlj;jdffghjhkgk hbjkbkkgkjgkgkjg bjkgkjgk jbjkbgjkgjkgjkgkj  s;j;k;;;</p>
                         </div>
                     </Col>
                 </Row>  
             </Container> 
+                        
            </div>
         );
     

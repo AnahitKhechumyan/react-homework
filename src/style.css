@@ -104,6 +104,9 @@
     background-color: #ffffff;
     border-color: #a248a3;
 }
+.taskContainer{
+    min-height: 395px;
+}
 .modal.show .modal-dialog .btn-success,
 .modal.show .modal-dialog .btn-success:focus,
 .modal.show .modal-dialog .btn-success:active{
@@ -164,9 +167,15 @@ color:indigo;
     color:indigo;
 }
 
+.text-danger-big{
+    color:red;
+    font-size:16px;
 
+}
 
- 
+ .taskContainer{
+     min-height:395px;
+ }
 @media (min-width: 1200px){
     #task-inner-padding{
         padding: 4px;

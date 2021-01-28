@@ -28,3 +28,6 @@
     background-color: #b5379b;
     border-color: #b5379b;
 }
+.contactContainer .text-danger{
+    color: white !important;
+}
