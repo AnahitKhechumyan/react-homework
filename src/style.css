@@ -105,7 +105,7 @@
     border-color: #a248a3;
 }
 .taskContainer{
-    min-height: 395px;
+    min-height: 417px;
 }
 .modal.show .modal-dialog .btn-success,
 .modal.show .modal-dialog .btn-success:focus,
@@ -128,12 +128,12 @@
 .footerBackground{
     background-color: #8248a3;
     width:100%;
-    height: 8vh;
+    height: 9vh;
     margin:0;
     text-align: center;
 }
 .footerBackground > a{
-    color:#fff;
+    color:#c49fda;
     padding: 0 10px;
     font-size:30px;
 }
@@ -142,13 +142,14 @@
     color:#fff;
 }
 .userName{
-    background-color: #dcb4e6;
-    color: #8c0aad;
-    padding-right: 16px;
+    margin:0px;
+    padding-right:5px;
+    color: #e6ceec;
+    font-size: 14px;
 }
-.userName > h5{
-    margin-bottom: 0;
-    padding: 2px 0;
+.userName:hover{
+    color: #fff;
+    font-size: 18px; 
 }
 
 .searchInput .btn-outline-secondary:hover,
@@ -169,15 +170,23 @@ color:indigo;
 
 .text-danger-big{
     color:red;
-    font-size:16px;
+    font-size:18px;
 
 }
-
- .taskContainer{
-     min-height:395px;
+ .notfoundpagemain{
+     height: 86vh;
  }
+ .notfoundpagemain >span{
+    margin-left:25px;
+    color: #780d92;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
 @media (min-width: 1200px){
     #task-inner-padding{
         padding: 4px;
     }
 } 
+ 

@@ -1,9 +1,9 @@
 .main{
-    height:calc(100vh - 85px);
+    height:calc(100vh - 110px);
     display:flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../../../images/2.jpg');
+    background-image: url('../../../images/5.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left;
@@ -32,6 +32,11 @@
     background-color: #8044f5;
     border-color: #8044f5;
 }
+.registerButton:hover{
+    background-color: #f3f1f7;
+    border-color: #8044f5;
+    color:#8044f5;
+}
 
 .registerLink{
     color: #c392dc;
@@ -40,3 +45,4 @@
 .registerLink:hover{
     color: #c392dc;
 }
+ 

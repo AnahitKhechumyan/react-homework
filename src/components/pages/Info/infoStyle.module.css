@@ -2,19 +2,34 @@
     background-image: url('../../../images/3.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    height:calc(100vh - 125px);
+    height:calc(100vh - 122px);
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 .aboutText{
     padding-top: 5vh;
-    color: #654b7a;
+    color: #591579;
+    
 }
 .aboutTodo{
-    font-size: 30px;
+    font-size: 27px;
     font-weight: bold;
     text-align: left;
-    padding-top: 40px;
+    align-items: center;
+    padding-top: 35px;
+    color: #b277e2;
 }
+.aboutTodo >span{
+    font-size: 40px;
+    font-weight: bold;
+    color: #591579;
+}
+@media (max-width:500px){
+    .aboutTodo >span{
+        font-weight: bold;
+        color: #874ea1;
+    }
+} 
  
+  

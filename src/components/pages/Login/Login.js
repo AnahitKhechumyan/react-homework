@@ -18,7 +18,6 @@ function Login(props){
     });
 
     const handleSubmit = ()=>{
-        //event.preventDefault();
         const {email, password} = values;
     
         setErrors({
@@ -40,14 +39,7 @@ function Login(props){
             [name]:null 
          });
     };
-      //const {registerSuccess, history} = props;
-      //useEffect(()=>{
-       //   if(registerSuccess){
-        //     history.push('/login');
-        //  }
-
-     // }, [registerSuccess, history])
-
+       
     return(
     <div className={styles.main}>
         <Container fluid> 

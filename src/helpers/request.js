@@ -13,11 +13,6 @@ const defaultError = {message: 'Something went wrong!'};
       }
    }
 
-
-  /*   const jwt = await getJWT();
-     if(!jwt){
-        return Promise.reject(defaultError);
-     }*/
      const config = {
          method: method,
          headers: {

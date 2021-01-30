@@ -37,9 +37,7 @@ class SingleTask extends PureComponent{
            isEdit: !this.state.isEdit
          });
       }
-      //handleSave = (taskId,data)=>{
-          // this.props.editTask(taskId,data);
-     // }
+     
      render(){
 
       const {task, disabled} = this.props;

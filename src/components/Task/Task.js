@@ -33,7 +33,7 @@ class Task extends PureComponent{
      const {data, removeTask, onEdit, disabled } = this.props;
      const {checked} = this.state;
 
-     const cardClasses = ['card', styles.task];
+     const cardClasses = ['card', styles.taskStyle];
      if(checked){
        cardClasses.push(styles.checked);
      } 
@@ -47,7 +47,7 @@ class Task extends PureComponent{
     }
     cardClasses.push(styles.taskStyle);
      return(
-       <Card className = {cardClasses.join(' ')}>
+       <Card className = {cardClasses.join(" ")}>
          <input
          type='checkbox'
          className = {styles.checkbox}

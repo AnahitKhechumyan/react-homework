@@ -16,11 +16,6 @@ import styles from  './navMenuStyle.module.css';
 
     return (
            <>
-           {
-               user && <div className = "text-right userName">
-               <h5>{user.name} {user.surname}</h5>
-               </div>
-           }
            <Navbar className = {styles.navigationPanel} variant="light">
           {
              isAuthenticated ? 
@@ -51,7 +46,6 @@ import styles from  './navMenuStyle.module.css';
              </> 
             }
 
-
              <NavLink 
                 exact 
                 activeClassName = {styles.activeLink}
@@ -68,6 +62,10 @@ import styles from  './navMenuStyle.module.css';
                 Contact
                 </NavLink>
             </Nav>
+            {
+               user &&  <p className = "userName">{user.name} {user.surname}</p>
+            }
+           
             {isAuthenticated && 
             <Button
              className = {styles.button}

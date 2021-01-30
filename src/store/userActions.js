@@ -81,7 +81,7 @@ export function sendMessage(data){
     return (dispatch)=>{
         dispatch({type:actionTypes.AUTH_LOADING});
 
-        request(`${apiUrl}/form`,'POST',data, true)
+        request(`${apiUrl}/form`,'POST',data,true)
          
         .then(response => {
            dispatch({type:actionTypes.SEND_MESSAGE_SUCCESS});

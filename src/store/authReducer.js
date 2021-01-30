@@ -59,7 +59,7 @@ const defaultState = {
       }
       case actionTypes.SEND_MESSAGE_SUCCESS:{
         return{
-           ...state,
+          ...state,
            loading: false,
            successMessage: 'Thanks for your message!!!'
        };

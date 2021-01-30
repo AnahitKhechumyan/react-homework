@@ -79,7 +79,7 @@ function Register(props){
                  onChange={handleChange}
                  />
                  {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.name}
                    </Form.Text>
                  }    
@@ -94,7 +94,7 @@ function Register(props){
                  onChange={handleChange}
                  />
                  {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.surname}
                    </Form.Text>
                  }    
@@ -109,7 +109,7 @@ function Register(props){
                  onChange={handleChange}
                  />
                  {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.email}
                    </Form.Text>
                  }                   
@@ -125,7 +125,7 @@ function Register(props){
                  onChange={handleChange}
                  />
                  {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.password}
                    </Form.Text>
                  }       
@@ -141,7 +141,7 @@ function Register(props){
                  onChange={handleChange}
                  />
                 {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.confirmPassword}
                    </Form.Text>
                  }       
@@ -171,51 +171,4 @@ function Register(props){
 
 export default connect(null, mapDispatchToProps)(Register);
 
-//function Register(){
-    //const [values, setValues] = useState({
-       // email: '' ,
-       // password: '' ,
-       // confirmPassword:''
-    //});
-
-    //const handleSubmit = (event)=>{
-       // event.preventDefault();
-    //};
-
-    //const handleChange = ({target: {name, value}})=>{
-        //setValues({
-           // ...values,
-           // [name]: value
-       // });
-    //};
-
-   // return(
-        // <div>
-            //</div> <form action="http://localhost:3001/contact" method='POST'>
-           //<input
-            //value= {values.email}
-            //onChange = {handleChange}
-            // type="email"
-            // name="email"
-            // />
-            //</form>/ <input
-            // value= {values.password}
-            // onChange = {handleChange} 
-            // type="password"
-            // name="password"
-            // />
-            //</form> <input 
-            // value= {values.cofirmPassword}
-            // onChange = {handleChange}
-            // type="password"
-            // name="cofirmPassword"
-            // />
-            // <input type="submit"
-            // onClick={handleSubmit}
-           //  />
-           //  </form>
-        // </div>
-   // );
-//}
-
-//export default Register;
+ 

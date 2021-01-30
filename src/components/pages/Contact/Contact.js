@@ -22,8 +22,7 @@ function Contact(props){
     });
     
          
-    const handleSubmit = (event)=>{
-        //event.preventDefault();
+    const handleSubmit = ()=>{
         const {name, email, message} = values;
          
 
@@ -33,13 +32,12 @@ function Contact(props){
             message: message ? null : 'Message is required'
 
          });
-         if(name && email && message){
+         if(values){
               props.sendMessage(values);     
          }
          
- 
     }; 
-     
+        
                        
     const handleChange = ({target: {name, value}})=>{
         setValues({
@@ -52,11 +50,8 @@ function Contact(props){
          });
     };
 
-    
-
-
         return(
-           <div className={[styles.main,styles.contactContainer].join(" ")}>
+           <div className={[styles.main, styles.contactContainer].join(" ")}>
            <Container> 
            <Row className="justify-content-center"> 
            <Col xs={12} sm={8} md={6}> 
@@ -82,7 +77,7 @@ function Contact(props){
                  <Form.Control
                   className={errors.email? styles.invalid:''}  
                   type="email"   
-                  placeholder="Enter  email"
+                  placeholder="Enter  email."
                   name="email"
                   value={values.email}
                   onChange={handleChange}
@@ -98,7 +93,7 @@ function Contact(props){
                  className={errors.message? styles.invalid:''}  
                  type="text" 
                  name="message"
-                 placeholder="Enter message"
+                 placeholder="Enter message."
                  value={values.message}
                  onChange={handleChange}
                  />
@@ -110,8 +105,9 @@ function Contact(props){
                </Form.Group>
               <div className={styles.submitContainer}>   
                 <Button variant="primary"
-                            onClick={handleSubmit}
-                className={styles.contactButton}
+                type="submit"
+                 className={styles.contactButton}
+                 onClick={handleSubmit}
                 >
                     Send
                 </Button>

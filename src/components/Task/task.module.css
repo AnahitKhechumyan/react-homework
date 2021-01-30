@@ -1,38 +1,34 @@
 .checkbox{
     margin:9px;
 }
-.task{
-    margin:0 auto 20px;
+ 
+.checked{
+    border:5px solid #f5f36f !important; 
+    
 }
 
 .active{
-    border:2px solid #0965c7;
+    border:5px solid  #c70962; 
 }
 
 .done{
-    border:2px solid #9da1a9;
+    border: 5px solid #b547c4;
 }
-
-.checked{
-    border:1px solid red;
-}
- 
-
 .taskStyle{
-    border: 4px solid #ab1bad;
-    border-radius: 15px;
+    top:10px;
+    border-radius: 15px; 
     text-align:center;
     color:#39043a;
     background-color: #f8d5f8;
     box-shadow:#c46cc4 10px 10px;
 }
 .singleTaskParent{
-    height:calc(100vh - 147px);
+    height:calc(100vh - 122px);
    background-color: #f8d5f8;
    padding:20px;
 }
 .singleTask{
-    height: 90%;
+    height: 85%;
     min-height: 350px;
     width: 30%;
     min-width:300px;
@@ -104,9 +100,11 @@
     max-height: 100px;
     overflow: hidden;
 }
-
-.footerBackground{
-    margin-top:10px;
-}
+@media (max-width:500px){
+    .taskStyle{
+      margin:5px 30px 15px;
+      padding:10px;
+    }
+} 
  
     
