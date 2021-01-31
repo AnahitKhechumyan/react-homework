@@ -69,7 +69,7 @@ function Register(props){
           <Col xs={12} sm={8} md={6}> 
            <Form>
                <h5 className={styles.heading}>Register</h5>
-            <Form.Group>
+            <Form.Group id={styles.registerForm}>
             <Form.Control
                 className={errors.name? styles.invalid:''}
                  type="text"
@@ -79,12 +79,12 @@ function Register(props){
                  onChange={handleChange}
                  />
                  {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.name}
                    </Form.Text>
                  }    
                 </Form.Group>
-                <Form.Group>
+                <Form.Group id={styles.registerForm}>
                  <Form.Control
                 className={errors.surname? styles.invalid:''}
                  type="text"
@@ -94,12 +94,12 @@ function Register(props){
                  onChange={handleChange}
                  />
                  {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.surname}
                    </Form.Text>
                  }    
                </Form.Group>
-               <Form.Group>
+               <Form.Group  id={styles.registerForm}>
                <Form.Control
                 className={errors.email? styles.invalid:''}
                  type="email"
@@ -109,13 +109,13 @@ function Register(props){
                  onChange={handleChange}
                  />
                  {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.email}
                    </Form.Text>
                  }                   
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group id={styles.registerForm}>
                 <Form.Control
                  className={errors.password? styles.invalid:''} 
                  type="password"
@@ -125,13 +125,13 @@ function Register(props){
                  onChange={handleChange}
                  />
                  {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.password}
                    </Form.Text>
                  }       
              </Form.Group>
 
-             <Form.Group>
+             <Form.Group id={styles.registerForm}>
                 <Form.Control 
                  className={errors.confirmPassword? styles.invalid:''} 
                  type="password"
@@ -141,7 +141,7 @@ function Register(props){
                  onChange={handleChange}
                  />
                 {
-                   <Form.Text className="text-danger">
+                   <Form.Text className="text-danger-big">
                       {errors.confirmPassword}
                    </Form.Text>
                  }       
@@ -150,11 +150,12 @@ function Register(props){
              <Button
               variant="primary"
               onClick={handleSubmit}
+              className={styles.registerButton}
               >
                 Register
              </Button>
         </div>
-           <Link to= '/login'>Already registered? Try to login.</Link>
+           <Link className={styles.registerLink} to= '/login'>Already registered? Try to login.</Link>
            </Form>
           </Col>
          </Row>
@@ -170,51 +171,4 @@ function Register(props){
 
 export default connect(null, mapDispatchToProps)(Register);
 
-//function Register(){
-    //const [values, setValues] = useState({
-       // email: '' ,
-       // password: '' ,
-       // confirmPassword:''
-    //});
-
-    //const handleSubmit = (event)=>{
-       // event.preventDefault();
-    //};
-
-    //const handleChange = ({target: {name, value}})=>{
-        //setValues({
-           // ...values,
-           // [name]: value
-       // });
-    //};
-
-   // return(
-        // <div>
-            //</div> <form action="http://localhost:3001/contact" method='POST'>
-           //<input
-            //value= {values.email}
-            //onChange = {handleChange}
-            // type="email"
-            // name="email"
-            // />
-            //</form>/ <input
-            // value= {values.password}
-            // onChange = {handleChange} 
-            // type="password"
-            // name="password"
-            // />
-            //</form> <input 
-            // value= {values.cofirmPassword}
-            // onChange = {handleChange}
-            // type="password"
-            // name="cofirmPassword"
-            // />
-            // <input type="submit"
-            // onClick={handleSubmit}
-           //  />
-           //  </form>
-        // </div>
-   // );
-//}
-
-//export default Register;
+ 

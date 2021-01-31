@@ -4,14 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import ToDo from './components/pages/ToDo';
 import {Route, Switch, Redirect}  from 'react-router-dom';
-import SingleTask from './components/pages/SingleTask';
+import SingleTask from './components/pages/SingleTask/SingleTask';
 import NotFound from './components/pages/NotFound';
 import Spinner from './components/Spinner/Spinner';
-import Info from './components/pages/Info';
-import Contact from './components/pages/Contact';
-import NavMenu from './components/NavMenu';
+import Info from './components/pages/Info/Info';
+import Contact from './components/pages/Contact/Contact';
+import NavMenu from './components/NavMenu/NavMenu';
 import Register from './components/pages/Register/Register';
 import Login from './components/pages/Login/Login';
+import Footer from './components/Footer/Footer';
 import {ToastContainer, toast} from 'react-toastify';
 import {connect} from 'react-redux';
 import CustomRoute from './components/Router/CustomRoute';
@@ -54,6 +55,7 @@ componentDidUpdate(){
        <Redirect to='/not-found'/>
 
     </Switch>
+    <Footer/>
  
     <ToastContainer
     position="bottom-left"

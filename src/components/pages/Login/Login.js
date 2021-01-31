@@ -18,7 +18,6 @@ function Login(props){
     });
 
     const handleSubmit = ()=>{
-        //event.preventDefault();
         const {email, password} = values;
     
         setErrors({
@@ -40,23 +39,17 @@ function Login(props){
             [name]:null 
          });
     };
-      //const {registerSuccess, history} = props;
-      //useEffect(()=>{
-       //   if(registerSuccess){
-        //     history.push('/login');
-        //  }
-
-     // }, [registerSuccess, history])
-
+       
     return(
     <div className={styles.main}>
-        <Container> 
+        <Container fluid> 
          <Row className="justify-content-center"> 
           <Col xs={12} sm={8} md={6}> 
            <Form>
                <h5 className={styles.heading}>Login</h5>
-               <Form.Group>
+               <Form.Group id={styles.loginForm}>
                <Form.Control
+                id={styles.loginInput}
                 className={errors.email? styles.invalid:''}
                  type="email"
                  name="email"
@@ -71,7 +64,7 @@ function Login(props){
                  }                   
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group  id={styles.loginForm}>
                 <Form.Control
                  className={errors.password? styles.invalid:''} 
                  type="password"
@@ -88,13 +81,14 @@ function Login(props){
              </Form.Group>  
         <div className="text-center"> 
              <Button
+              className={styles.loginButton}
               variant="primary"
               onClick={handleSubmit}
               >
                 Login
              </Button>
         </div>
-           <Link to='/register'>Don't have account yet? Register now!</Link>
+           <Link className={styles.loginLink} to='/register'>Don't have account yet? Register now!</Link>
            </Form>
           </Col>
          </Row>

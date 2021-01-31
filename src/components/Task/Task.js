@@ -33,7 +33,7 @@ class Task extends PureComponent{
      const {data, removeTask, onEdit, disabled } = this.props;
      const {checked} = this.state;
 
-     const cardClasses = ['card', styles.task];
+     const cardClasses = ['card', styles.taskStyle];
      if(checked){
        cardClasses.push(styles.checked);
      } 
@@ -45,9 +45,9 @@ class Task extends PureComponent{
     else{
       cardClasses.push(styles.done);
     }
- 
+    cardClasses.push(styles.taskStyle);
      return(
-       <Card className = {cardClasses.join(' ')}>
+       <Card className = {cardClasses.join(" ")}>
          <input
          type='checkbox'
          className = {styles.checkbox}
@@ -55,19 +55,19 @@ class Task extends PureComponent{
          />
          <Card.Body id = 'task-inner-padding'>
               <Link to ={`/task/${data._id}`}>
-              <Card.Title>{data.title} </Card.Title>
+              <Card.Title id='taskTitle'>{data.title} </Card.Title>
               </Link>
-             <Card.Text>
+             <Card.Text className = 'text-left'>
                 Description: {shortStr(data.description, 25)}
              </Card.Text>
-             <Card.Text>
+             <Card.Text className = 'text-left'>
                  Date: {formatDate(data.date)}
              </Card.Text>
-             <Card.Text>
+             <Card.Text className = 'text-left'>
                  Created: {formatDate(data.created_at)}
              </Card.Text>
                
-             <Card.Text>
+             <Card.Text className = 'text-left'>
                  Status: {data.status}
              </Card.Text>
 

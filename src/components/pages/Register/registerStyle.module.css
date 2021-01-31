@@ -1,14 +1,23 @@
 .main{
-    height:calc(100vh - 56px);
+    height:calc(100vh - 110px);
     display:flex;
     justify-content: center;
     align-items: center;
+    background-image: url('../../../images/5.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    text-align: center;
 }
 .heading{
     margin-bottom: 20px;
     text-align: center;
+    color: #d489ff;
 }
-
+#registerForm{
+    width: 85%;
+    padding-left: 15%;
+}
 .submitContainer{
     text-align: center;    
 }
@@ -19,3 +28,21 @@
 .invalid{
     border:1px solid red;
 }
+.registerButton{
+    background-color: #8044f5;
+    border-color: #8044f5;
+}
+.registerButton:hover{
+    background-color: #f3f1f7;
+    border-color: #8044f5;
+    color:#8044f5;
+}
+
+.registerLink{
+    color: #c392dc;
+    text-decoration: none;
+}
+.registerLink:hover{
+    color: #c392dc;
+}
+ 

@@ -57,6 +57,15 @@ const defaultState = {
            userInfo: action.userInfo
        };
       }
+      case actionTypes.SEND_MESSAGE_SUCCESS:{
+        return{
+          ...state,
+           loading: false,
+           successMessage: 'Thanks for your message!!!'
+       };
+      }
+
+
       
     default: return state;
   }
