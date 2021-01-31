@@ -76,7 +76,7 @@ export function getUserInfo(){
     }
 } 
  
-export function sendMessage(data){
+export function sendMessage(data, successFunc){
 
     return (dispatch)=>{
         dispatch({type:actionTypes.AUTH_LOADING});
@@ -85,7 +85,7 @@ export function sendMessage(data){
          
         .then(response => {
            dispatch({type:actionTypes.SEND_MESSAGE_SUCCESS});
-           
+           successFunc();
         })
         .catch((err) =>{
             dispatch({type:actionTypes.AUTH_ERROR, error:err.message});    

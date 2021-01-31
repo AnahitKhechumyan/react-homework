@@ -33,11 +33,19 @@ function Contact(props){
 
          });
          if(values){
-              props.sendMessage(values);     
+              props.sendMessage(values, emptyForm);     
          }
          
     }; 
-        
+    const emptyForm = ()=>{
+        setValues({
+            name: '',
+            email: '', 
+            message: ''
+
+         });
+         
+    };    
                        
     const handleChange = ({target: {name, value}})=>{
         setValues({
@@ -104,8 +112,7 @@ function Contact(props){
                    }
                </Form.Group>
               <div className={styles.submitContainer}>   
-                <Button variant="primary"
-                type="submit"
+                <Button variant="primary"               
                  className={styles.contactButton}
                  onClick={handleSubmit}
                 >
