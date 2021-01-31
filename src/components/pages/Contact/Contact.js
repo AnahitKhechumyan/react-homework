@@ -105,7 +105,7 @@ function Contact(props){
                </Form.Group>
               <div className={styles.submitContainer}>   
                 <Button variant="primary"
-                type="submit"
+                
                  className={styles.contactButton}
                  onClick={handleSubmit}
                 >
