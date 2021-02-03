@@ -219,7 +219,8 @@ const defaultState = {
     default: return{
       ...state,
       loading: false,
-      successMessage: null
+      successMessage: null,
+      error: null
     } 
   }
 };  
