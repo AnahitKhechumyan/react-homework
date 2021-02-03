@@ -76,7 +76,7 @@ export function getUserInfo(){
     }
 } 
  
-export function sendMessage(data, successFunc){
+export function sendMessage(data,successFunc){
 
     return (dispatch)=>{
         dispatch({type:actionTypes.AUTH_LOADING});

@@ -63,7 +63,7 @@ import styles from  './navMenuStyle.module.css';
                 </NavLink>
             </Nav>
             {
-               user &&  <p className = "userName">{user.name} {user.surname}</p>
+               user && <p className = "userName">{user.name} {user.surname}</p>
             }
            
             {isAuthenticated && 

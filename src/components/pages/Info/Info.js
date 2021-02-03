@@ -14,7 +14,7 @@ function Info(){
                             <h1>BY NOT PLANNING <br/>WHAT TO DO,<br/> WE ARE PLANNING<br/> OUR FAILURE...</h1>
                         </div>
                         <div>
-                            <p className= {styles.aboutTodo}>This project is a simple to use <span>To Do</span> list app that can help you plan,
+                            <p className= {styles.aboutTodo}>This project is  simple to use <span>To Do</span> list app that can to help you plan,
                                  track, and get more tasks done. You can create unlimited tasks, set status, filter the list of the
                                  tasks with several conditions, edit and delete the tasks, change the status.</p>
                         </div>
