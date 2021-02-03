@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import {Form, Button, Container, Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux';  
 import {sendMessage} from '../../../store/userActions';
-// import {Link} from 'react-router-dom';
 import styles from './contactStyle.module.css';
 
  

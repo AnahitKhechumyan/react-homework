@@ -78,7 +78,7 @@ const defaultState = {
            loading: false,
            tasks: [...state.tasks, action.task],
            addTaskSuccess: true,
-           successMessage:'Task added successfully'
+           successMessage:'Task added successfully!'
         };
       }
        
@@ -94,7 +94,7 @@ const defaultState = {
         const newState = {
           ...state,
           loading: false,
-          successMessage:'Task removed successfully'
+          successMessage:'Task removed successfully!'
         }
         if(action.from === 'single'){
           return{
@@ -134,7 +134,7 @@ const defaultState = {
            loading: false,
            tasks: newTasks,
            removeTasksSuccess: true,
-           successMessage:'Tasks removed successfully'
+           successMessage:'Tasks removed successfully!'
         };
       }
       
@@ -152,7 +152,7 @@ const defaultState = {
           ...state,
           loading: false,
           editTaskSuccess: true,
-          successMessage: 'Task edited successfully'
+          successMessage: 'Task edited successfully!'
         }
 
 
@@ -215,7 +215,12 @@ const defaultState = {
        };
       }
     }
-    default: return state;
+
+    default: return{
+      ...state,
+      loading: false,
+      successMessage: null
+    } 
   }
 };  
    

@@ -6,16 +6,15 @@ const defaultState = {
      loading: false,
      successMessage: null,
      error: null,
-     userInfo: null 
+     userInfo: null  
   };
 
   export const authReducer = (state = defaultState, action)=>{
     const loadingState = {
       ...state,
       loading: true,
-      successMessage: null,
-      error: null
-      
+      successMessage: null, 
+      error: null  
    };
     
     switch(action.type){ 
@@ -57,17 +56,21 @@ const defaultState = {
            userInfo: action.userInfo
        };
       }
+
       case actionTypes.SEND_MESSAGE_SUCCESS:{
         return{
-          ...state,
+           ...state,
            loading: false,
            successMessage: 'Thanks for your message!!!'
        };
+         
       }
-
-
-      
-    default: return state;
+       
+      default: return{
+        ...state,
+        loading: false,
+        successMessage: null
+      } 
   }
 };  
    
